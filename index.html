@@ -375,6 +375,40 @@
 
         .product-info .section-label { margin-bottom: 20px; }
 
+        .product-visual-mobile {
+            display: none;
+            aspect-ratio: 3/4;
+            background: linear-gradient(145deg, #ede3d4 0%, #d9c9b3 50%, #c8ae94 100%);
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            margin: 28px 0;
+        }
+        .product-visual-mobile img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .product-visual-mobile .product-visual-glow {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 25% 25%, rgba(255,255,255,0.28) 0%, transparent 55%),
+                radial-gradient(ellipse at 75% 75%, rgba(30,30,30,0.07) 0%, transparent 45%);
+        }
+        .product-visual-mobile .product-visual-label {
+            position: absolute;
+            bottom: 40px;
+            left: 40px;
+            right: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
         .product-name {
             font-family: Georgia, 'Times New Roman', serif;
             font-size: clamp(2.2rem, 4vw, 3.8rem);
@@ -1003,7 +1037,8 @@
             .hero { padding-left: 32px; padding-right: 32px; }
             .hero-scroll-hint { left: 32px; }
             .product-grid { grid-template-columns: 1fr; gap: 52px; }
-            .product-visual { aspect-ratio: 16/9; }
+            .product-visual { display: none; }
+            .product-visual-mobile { display: block; }
             .story-stats { grid-template-columns: 1fr 1fr; }
             .story-stat:nth-child(3) { padding-left: 0; border-left: none; padding-top: 40px; border-top: 1px solid rgba(245,241,232,0.12); grid-column: 1/-1; }
             .values-header { flex-direction: column; align-items: flex-start; }
@@ -1071,7 +1106,7 @@
     </h1>
 
     <p class="hero-subtitle">
-        Slow-rendered, locally sourced beef tallow. Nothing added. Nothing removed.
+        Nothing added, nothing removed.
     </p>
 
     <div class="hero-actions">
@@ -1100,6 +1135,14 @@
         <div class="product-info">
             <span class="section-label reveal">Products</span>
             <h2 class="product-name reveal delay-1">VERU<br>Tallow</h2>
+            <div class="product-visual-mobile">
+                <img src="https://placehold.co/600x800/C2A98A/F5F1E8?text=Product+Photo" alt="VERU Tallow product photo placeholder">
+                <div class="product-visual-glow"></div>
+                <div class="product-visual-label">
+                    <div class="product-visual-name">VERU</div>
+                    <div class="product-visual-sub">Beef Tallow &mdash; Small Batch</div>
+                </div>
+            </div>
             <p class="product-desc reveal delay-2">
                 Premium beef tallow rendered slowly in small batches from locally sourced beef fat.
                 Pure, natural, and crafted with care &mdash; no shortcuts, no additives.
@@ -1110,7 +1153,6 @@
                 <li>Locally sourced beef fat</li>
                 <li>No additives or preservatives</li>
                 <li>Slow-rendered for purity</li>
-                <li>Mid-tier, fair pricing</li>
             </ul>
             <a href="#order" class="btn-primary reveal delay-4"><span>Order Your Jar</span></a>
         </div>
@@ -1197,7 +1239,7 @@
         <!-- Brand + nav -->
         <div class="footer-brand">
             <div class="footer-logo">VERU</div>
-            <p class="footer-tagline">Real products, from natural sources.<br>Small batch. Locally sourced. Nothing added.</p>
+            <p class="footer-tagline">Real products, from natural sources.<br>Nothing added, nothing removed.</p>
         </div>
 
         <!-- Copyright -->
