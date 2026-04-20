@@ -219,8 +219,12 @@
         .hero-scroll-hint {
             position: absolute;
             bottom: 44px;
-            left: 64px;
+            left: 0;
+            right: 0;
+            width: fit-content;
+            margin: 0 auto;
             display: flex;
+            flex-direction: column;
             align-items: center;
             gap: 16px;
             opacity: 0;
@@ -228,10 +232,10 @@
         }
 
         .scroll-line {
-            width: 48px;
-            height: 1px;
+            width: 1px;
+            height: 48px;
             background: var(--beige);
-            transform-origin: left;
+            transform-origin: top;
             animation: lineGrow 1.8s ease-in-out 1.5s infinite alternate;
         }
 
@@ -532,7 +536,7 @@
 
         /* ─── ORDER ─── */
         .order-section {
-            padding: 120px 64px;
+            padding: 72px 64px;
         }
 
         .order-inner {
@@ -541,7 +545,7 @@
         }
 
         .order-heading {
-            margin-bottom: 64px;
+            margin-bottom: 32px;
         }
 
         .order-title {
@@ -664,6 +668,21 @@
             gap: 14px;
         }
 
+        .order-product-image {
+            flex-shrink: 0;
+            width: 140px;
+            height: 140px;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .order-product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
         .order-note {
             font-size: 0.72rem;
             color: #aaa;
@@ -751,8 +770,8 @@
         }
 
         @keyframes lineGrow {
-            from { width: 32px; opacity: 0.5; }
-            to   { width: 64px; opacity: 1; }
+            from { height: 28px; opacity: 0.5; }
+            to   { height: 64px; opacity: 1; }
         }
 
         .reveal {
@@ -942,7 +961,7 @@
     </div>
 
     <h1 class="hero-title">
-        Real products,<br>from <em>natural</em><br>sources.
+        VERU. Real products,<br>from <em>natural</em><br>sources.
     </h1>
 
     <p class="hero-subtitle">
@@ -951,7 +970,6 @@
 
     <div class="hero-actions">
         <a href="#order" class="btn-primary"><span>Order Now</span></a>
-        <a href="#story" class="btn-ghost">Our Story &nbsp;&#x2192;</a>
     </div>
 
     <div class="hero-scroll-hint">
@@ -1040,6 +1058,9 @@
                     <h3 class="order-product-name">VERU Tallow</h3>
                     <p class="order-product-desc">Small batch, locally sourced beef tallow. Slow-rendered for purity — no additives, no shortcuts.</p>
                 </div>
+                <div class="order-product-image">
+                    <img src="https://placehold.co/160x160/C2A98A/F5F1E8?text=Photo" alt="VERU Tallow product photo">
+                </div>
             </div>
 
             <!-- Controls row -->
@@ -1076,7 +1097,7 @@
             <p class="footer-col-title">Navigate</p>
             <ul class="footer-links">
                 <li><a href="#product">Products</a></li>
-                <li><a href="#values">About Us</a></li>
+                <li><a href="#values">Why VERU?</a></li>
                 <li><a href="#order">Order</a></li>
             </ul>
         </div>
