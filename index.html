@@ -568,6 +568,79 @@
             line-height: 1.85;
         }
 
+        /* ─── BENEFITS ─── */
+        .benefits-section {
+            padding: 120px 64px;
+            background: var(--charcoal);
+            color: var(--cream);
+        }
+
+        .benefits-inner {
+            display: grid;
+            grid-template-columns: 1fr 1.3fr;
+            gap: 100px;
+            align-items: start;
+        }
+
+        .benefits-left .section-label { color: var(--beige); margin-bottom: 24px; display: block; }
+
+        .benefits-heading {
+            font-family: Georgia, serif;
+            font-size: clamp(2rem, 3.5vw, 3rem);
+            font-weight: normal;
+            line-height: 1.15;
+            color: var(--cream);
+            margin-bottom: 28px;
+        }
+
+        .benefits-heading em { font-style: italic; color: var(--beige); }
+
+        .benefits-intro {
+            font-size: 0.88rem;
+            line-height: 1.85;
+            color: rgba(245,241,232,0.55);
+            max-width: 340px;
+        }
+
+        .benefits-deco { margin-top: 64px; }
+        .benefits-deco svg { width: 96px; height: 128px; }
+
+        .benefits-list { display: flex; flex-direction: column; }
+
+        .benefit-item {
+            display: grid;
+            grid-template-columns: 36px 1fr;
+            gap: 24px;
+            align-items: start;
+            padding: 28px 0;
+            border-bottom: 1px solid rgba(245,241,232,0.08);
+        }
+
+        .benefit-item:first-child { border-top: 1px solid rgba(245,241,232,0.08); }
+
+        .benefit-icon {
+            width: 22px;
+            height: 22px;
+            margin-top: 3px;
+            color: var(--beige);
+            flex-shrink: 0;
+        }
+
+        .benefit-title {
+            font-family: Georgia, serif;
+            font-size: 0.95rem;
+            font-weight: normal;
+            color: var(--cream);
+            margin: 0 0 6px;
+        }
+
+        .benefit-desc {
+            font-size: 0.82rem;
+            color: rgba(245,241,232,0.5);
+            line-height: 1.75;
+            margin: 0;
+        }
+
         /* ─── ORDER ─── */
         .order-section {
             padding: 72px 64px;
@@ -724,6 +797,9 @@
         }
 
         @media (max-width: 600px) {
+            .benefits-section { padding: 80px 24px; }
+            .benefits-inner { grid-template-columns: 1fr; gap: 48px; }
+            .benefits-deco { display: none; }
             .order-section { padding: 80px 24px; }
             .order-product-row { flex-direction: column; align-items: flex-start; padding: 32px 28px; }
             .order-controls-row { flex-direction: column; align-items: flex-start; padding: 28px 28px; }
@@ -1173,17 +1249,112 @@
         <div class="value-card reveal delay-1">
             <div class="value-num">01</div>
             <h3 class="value-title">Honest Sourcing</h3>
-            <p class="value-text">We work directly with local suppliers. Every batch is traceable, every ingredient is real. No mystery supply chains, no compromises.</p>
+            <p class="value-text">We work directly with local suppliers. Every batch is traceable, every ingredient is real.</p>
         </div>
         <div class="value-card reveal delay-2">
             <div class="value-num">02</div>
-            <h3 class="value-title">Pure Rendering</h3>
+            <h3 class="value-title">Slow Rendering</h3>
             <p class="value-text">Low and slow. Our rendering process preserves the natural properties of beef fat without rushing or introducing anything artificial.</p>
         </div>
         <div class="value-card reveal delay-3">
             <div class="value-num">03</div>
             <h3 class="value-title">Fair Pricing</h3>
-            <p class="value-text">Mid-tier pricing that reflects true quality and respects our community. Real food should be accessible. That principle guides every decision.</p>
+            <p class="value-text">Real quality food should be accessible. That principle guides every decision.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ─── BENEFITS ─── -->
+<section class="benefits-section" id="benefits">
+    <div class="benefits-inner">
+        <div class="benefits-left reveal">
+            <h2 class="benefits-heading">Why cook with<br><em>beef tallow?</em></h2>
+            <p class="benefits-intro">For centuries, beef tallow was the cooking fat of choice. Modern food science swapped it out for seed oils — but the old ways had it right.</p>
+            <div class="benefits-deco" aria-hidden="true">
+                <svg viewBox="0 0 96 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M48 4C24 36 6 64 6 88C6 110 25 124 48 124C71 124 90 110 90 88C90 64 72 36 48 4Z" stroke="rgba(194,169,138,0.18)" stroke-width="1.5"/>
+                    <path d="M48 28C34 52 22 72 22 88C22 102 33 114 48 114C63 114 74 102 74 88C74 72 62 52 48 28Z" stroke="rgba(194,169,138,0.1)" stroke-width="1"/>
+                    <path d="M48 54C40 68 36 80 36 88C36 96 41 102 48 102C55 102 60 96 60 88C60 80 56 68 48 54Z" stroke="rgba(194,169,138,0.07)" stroke-width="1"/>
+                </svg>
+            </div>
+        </div>
+        <div class="benefits-list">
+            <div class="benefit-item reveal delay-1">
+                <svg class="benefit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                    <line x1="12" y1="2" x2="12" y2="14"/><circle cx="12" cy="17" r="3"/><line x1="8" y1="6" x2="10" y2="6"/><line x1="8" y1="10" x2="10" y2="10"/>
+                </svg>
+                <div>
+                    <h3 class="benefit-title">High Smoke Point</h3>
+                    <p class="benefit-desc">Stable above 200°C — perfect for roasting, frying, and searing without oxidising or releasing harmful compounds.</p>
+                </div>
+            </div>
+            <div class="benefit-item reveal delay-2">
+                <svg class="benefit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 2L4 6v6c0 5 4 9 8 10 4-1 8-5 8-10V6L12 2z"/><path d="M9 12l2 2 4-4"/>
+                </svg>
+                <div>
+                    <h3 class="benefit-title">No Seed Oils</h3>
+                    <p class="benefit-desc">Free from inflammatory vegetable and seed oils. Pure rendered fat — nothing added, nothing removed.</p>
+                </div>
+            </div>
+            <div class="benefit-item reveal delay-3">
+                <svg class="benefit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                    <path d="M12 2C8 8 5 13 5 16a7 7 0 0014 0c0-3-3-8-7-14z"/>
+                </svg>
+                <div>
+                    <h3 class="benefit-title">Vitamins A, D, E &amp; K</h3>
+                    <p class="benefit-desc">Naturally rich in fat-soluble vitamins your body actually absorbs — especially when paired with whole foods.</p>
+                </div>
+            </div>
+            <div class="benefit-item reveal delay-4">
+                <svg class="benefit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                    <line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/>
+                    <line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/>
+                    <line x1="4.9" y1="4.9" x2="7.8" y2="7.8"/><line x1="16.2" y1="16.2" x2="19.1" y2="19.1"/>
+                    <line x1="4.9" y1="19.1" x2="7.8" y2="16.2"/><line x1="16.2" y1="7.8" x2="19.1" y2="4.9"/>
+                </svg>
+                <div>
+                    <h3 class="benefit-title">Exceptional Flavour</h3>
+                    <p class="benefit-desc">Adds a rich, savoury depth to roast potatoes, vegetables, and meat that no plant-based oil can replicate.</p>
+                </div>
+            </div>
+            <div class="benefit-item reveal delay-5">
+                <svg class="benefit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M5 2h14M5 22h14M7 2v5l5 5-5 5v5M17 2v5l-5 5 5 5v5"/>
+                </svg>
+                <div>
+                    <h3 class="benefit-title">Long Shelf Life</h3>
+                    <p class="benefit-desc">Naturally shelf-stable for months without refrigeration or preservatives. Rendered fat keeps the way nature intended.</p>
+                </div>
+            </div>
+            <div class="benefit-item reveal delay-5">
+                <svg class="benefit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/>
+                    <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
+                </svg>
+                <div>
+                    <h3 class="benefit-title">Conjugated Linoleic Acid</h3>
+                    <p class="benefit-desc">A naturally occurring fatty acid in grass-fed beef fat, linked to reduced inflammation and a healthy metabolism.</p>
+                </div>
+            </div>
+            <div class="benefit-item reveal delay-5">
+                <svg class="benefit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 2C8 8 5 13 5 16a7 7 0 0014 0c0-3-3-8-7-14z"/>
+                </svg>
+                <div>
+                    <h3 class="benefit-title">Natural Skin Moisturiser</h3>
+                    <p class="benefit-desc">Tallow's fatty acid profile closely mirrors human sebum — making it one of the most biocompatible moisturisers for skin, without synthetic emollients.</p>
+                </div>
+            </div>
+            <div class="benefit-item reveal delay-5">
+                <svg class="benefit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                </svg>
+                <div>
+                    <h3 class="benefit-title">Skin-Safe &amp; Cosmetic Grade</h3>
+                    <p class="benefit-desc">Pure enough to eat, gentle enough for your face. VERU tallow contains no fragrances, no parabens, and no synthetics — just rendered fat as nature made it.</p>
+                </div>
+            </div>
         </div>
     </div>
 </section>
@@ -1195,7 +1366,6 @@
     <div class="order-inner">
         <div class="order-heading reveal">
             <span class="section-label">Order</span>
-            <h2 class="order-title">Place your<br><em>order.</em></h2>
         </div>
 
         <div class="order-card reveal delay-2">
