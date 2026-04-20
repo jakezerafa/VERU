@@ -57,10 +57,7 @@
             -webkit-backdrop-filter: blur(14px);
             box-shadow: 0 4px 32px rgba(30,30,30,0.09), 0 1px 0 rgba(255,255,255,0.6) inset;
             overflow: hidden;
-            /* spring-like transition using cubic-bezier */
-            transition:
-                width 0.55s cubic-bezier(0.34, 1.56, 0.64, 1),
-                box-shadow 0.35s ease;
+            transition: box-shadow 0.35s ease;
             white-space: nowrap;
         }
 
@@ -121,48 +118,6 @@
 
         .fnav-cta a:hover { background: var(--beige); color: var(--charcoal); }
 
-        /* ── Collapsed state ── */
-        .fnav-menu-icon {
-            position: absolute;
-            inset: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            pointer-events: none;
-            opacity: 0;
-            transform: scale(0.7) rotate(90deg);
-            transition: opacity 0.25s ease 0.1s, transform 0.35s cubic-bezier(0.34,1.56,0.64,1) 0.1s;
-        }
-
-        .fnav-menu-icon svg { width: 20px; height: 20px; stroke: var(--charcoal); }
-
-        /* ── JS-toggled classes ── */
-        .fnav-wrap.collapsed .fnav { cursor: pointer; }
-        .fnav-wrap.collapsed .fnav:active { transform: scale(0.93); }
-
-        .fnav-wrap.collapsed .fnav-logo {
-            opacity: 0;
-            transform: translateX(-16px) rotate(-90deg);
-            pointer-events: none;
-        }
-
-        .fnav-wrap.collapsed .fnav-links {
-            opacity: 0;
-            transform: translateX(-12px);
-            pointer-events: none;
-        }
-
-        .fnav-wrap.collapsed .fnav-cta {
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.2s ease;
-        }
-
-        .fnav-wrap.collapsed .fnav-menu-icon {
-            opacity: 1;
-            transform: scale(1) rotate(0deg);
-            pointer-events: none;
-        }
 
         /* ─── HERO ─── */
         .hero {
@@ -183,6 +138,22 @@
             height: 100%;
             background: linear-gradient(160deg, transparent 40%, rgba(194, 169, 138, 0.09) 100%);
             pointer-events: none;
+        }
+
+        .hero-image {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 40%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.55;
         }
 
         .hero-bg-line {
@@ -355,6 +326,15 @@
             background: linear-gradient(145deg, #ede3d4 0%, #d9c9b3 50%, #c8ae94 100%);
             position: relative;
             overflow: hidden;
+        }
+
+        .product-visual img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
         }
 
         .product-visual-glow {
@@ -532,7 +512,7 @@
         .value-num {
             font-family: Georgia, serif;
             font-size: 4rem;
-            color: rgba(30,30,30,0.055);
+            color: rgba(30,30,30,0.22);
             line-height: 1;
             margin-bottom: 28px;
         }
@@ -550,31 +530,151 @@
             line-height: 1.85;
         }
 
-        /* ─── CTA ─── */
-        .cta-section {
-            text-align: center;
-            padding: 160px 64px;
+        /* ─── ORDER ─── */
+        .order-section {
+            padding: 120px 64px;
         }
 
-        .cta-title {
+        .order-inner {
+            max-width: 860px;
+            margin: 0 auto;
+        }
+
+        .order-heading {
+            margin-bottom: 64px;
+        }
+
+        .order-title {
             font-family: Georgia, serif;
-            font-size: clamp(2.8rem, 6vw, 5.8rem);
+            font-size: clamp(2.4rem, 5vw, 4.2rem);
             font-weight: normal;
             line-height: 1.08;
-            margin-bottom: 36px;
+            margin-top: 16px;
         }
 
-        .cta-title em {
-            font-style: italic;
-            color: var(--beige);
+        .order-title em { font-style: italic; color: var(--beige); }
+
+        .order-card {
+            border: 1px solid rgba(30,30,30,0.1);
+            border-radius: 4px;
+            overflow: hidden;
         }
 
-        .cta-text {
-            max-width: 440px;
-            margin: 0 auto 60px;
+        .order-product-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 40px 48px;
+            border-bottom: 1px solid rgba(30,30,30,0.08);
+            gap: 24px;
+        }
+
+        .order-product-name {
+            font-family: Georgia, serif;
+            font-size: 1.55rem;
+            font-weight: normal;
+            margin-bottom: 8px;
+        }
+
+        .order-product-desc {
+            font-size: 0.85rem;
             color: #6a6460;
-            font-size: 0.93rem;
-            line-height: 1.9;
+            line-height: 1.75;
+            max-width: 340px;
+        }
+
+        .order-product-tag {
+            display: inline-block;
+            font-size: 0.65rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--olive);
+            border: 1px solid var(--olive);
+            padding: 4px 10px;
+            border-radius: 9999px;
+            margin-bottom: 14px;
+        }
+
+        .order-controls-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 36px 48px;
+            gap: 32px;
+            flex-wrap: wrap;
+        }
+
+        .order-qty-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .order-qty-label {
+            font-size: 0.68rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: #999;
+        }
+
+        .qty-stepper {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            border: 1px solid rgba(30,30,30,0.15);
+            border-radius: 9999px;
+            overflow: hidden;
+            width: fit-content;
+        }
+
+        .qty-btn {
+            background: none;
+            border: none;
+            width: 44px;
+            height: 44px;
+            font-size: 1.3rem;
+            cursor: pointer;
+            color: var(--charcoal);
+            transition: background 0.2s ease, color 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+        }
+
+        .qty-btn:hover { background: var(--charcoal); color: var(--cream); }
+
+        .qty-value {
+            min-width: 48px;
+            text-align: center;
+            font-family: Georgia, serif;
+            font-size: 1.1rem;
+            border-left: 1px solid rgba(30,30,30,0.12);
+            border-right: 1px solid rgba(30,30,30,0.12);
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .order-action-group {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 14px;
+        }
+
+        .order-note {
+            font-size: 0.72rem;
+            color: #aaa;
+            letter-spacing: 0.04em;
+        }
+
+        @media (max-width: 600px) {
+            .order-section { padding: 80px 24px; }
+            .order-product-row { flex-direction: column; align-items: flex-start; padding: 32px 28px; }
+            .order-controls-row { flex-direction: column; align-items: flex-start; padding: 28px 28px; }
+            .order-action-group { align-items: flex-start; }
         }
 
         /* ─── FOOTER ─── */
@@ -689,6 +789,90 @@
         .delay-4 { transition-delay: 0.4s; }
         .delay-5 { transition-delay: 0.55s; }
 
+        /* ─── BURGER BUTTON ─── */
+        .fnav-burger {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            padding: 0;
+            margin-right: 6px;
+            flex-shrink: 0;
+        }
+
+        .fnav-burger-bar {
+            display: block;
+            position: relative;
+            width: 18px;
+            height: 1.5px;
+            background: var(--charcoal);
+            transition: background 0.25s ease;
+        }
+
+        .fnav-burger-bar::before,
+        .fnav-burger-bar::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--charcoal);
+            transition: transform 0.3s cubic-bezier(0.22,1,0.36,1), top 0.3s cubic-bezier(0.22,1,0.36,1), opacity 0.2s ease;
+        }
+
+        .fnav-burger-bar::before { top: -5px; }
+        .fnav-burger-bar::after  { top:  5px; }
+
+        .fnav-burger.open .fnav-burger-bar { background: transparent; }
+        .fnav-burger.open .fnav-burger-bar::before { top: 0; transform: rotate(45deg); }
+        .fnav-burger.open .fnav-burger-bar::after  { top: 0; transform: rotate(-45deg); }
+
+        /* ─── MOBILE MENU DROPDOWN ─── */
+        .fnav-mobile-menu {
+            display: none;
+            flex-direction: column;
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 50%;
+            transform: translateX(-50%) translateY(-10px);
+            background: rgba(245, 241, 232, 0.96);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid rgba(30,30,30,0.13);
+            border-radius: 20px;
+            box-shadow: 0 8px 40px rgba(30,30,30,0.12);
+            min-width: 180px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease, transform 0.32s cubic-bezier(0.22,1,0.36,1);
+            overflow: hidden;
+        }
+
+        .fnav-mobile-menu.open {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+            pointer-events: auto;
+        }
+
+        .fnav-mobile-menu a {
+            text-decoration: none;
+            color: var(--charcoal);
+            font-size: 0.76rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            padding: 16px 28px;
+            opacity: 0.65;
+            transition: opacity 0.2s ease, background 0.2s ease, color 0.2s ease;
+            border-bottom: 1px solid rgba(30,30,30,0.07);
+        }
+
+        .fnav-mobile-menu a:last-child { border-bottom: none; }
+        .fnav-mobile-menu a:hover { opacity: 1; color: var(--beige); background: rgba(194,169,138,0.07); }
+
         /* ─── RESPONSIVE ─── */
         @media (max-width: 960px) {
             section, footer, .footer-inner { padding-left: 32px; padding-right: 32px; }
@@ -703,8 +887,9 @@
             .value-card { border-right: none; border-bottom: 1px solid rgba(30,30,30,0.09); }
             .value-card:last-child { border-bottom: none; }
             .footer-inner { grid-template-columns: 1fr 1fr; }
-            /* hide text links on small screens, show only logo + order */
-            .fnav-links a:not(:last-child) { display: none; }
+            .fnav-links { display: none; }
+            .fnav-burger { display: flex; }
+            .fnav-mobile-menu { display: flex; }
         }
 
         @media (max-width: 600px) {
@@ -730,30 +915,31 @@
         <!-- Nav links -->
         <div class="fnav-links">
             <a href="#product">Product</a>
-            <a href="#story">Story</a>
             <a href="#values">Values</a>
         </div>
         <!-- CTA button -->
         <div class="fnav-cta">
             <a href="#order">Order Now</a>
         </div>
-        <!-- Collapsed menu icon (shown when collapsed) -->
-        <div class="fnav-menu-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="4" y1="6" x2="20" y2="6"/>
-                <line x1="4" y1="12" x2="20" y2="12"/>
-                <line x1="4" y1="18" x2="20" y2="18"/>
-            </svg>
-        </div>
+        <!-- Burger (mobile only) -->
+        <button class="fnav-burger" id="fnav-burger" aria-label="Open menu" aria-expanded="false">
+            <span class="fnav-burger-bar"></span>
+        </button>
     </nav>
+    <!-- Mobile dropdown -->
+    <div class="fnav-mobile-menu" id="fnav-mobile-menu">
+        <a href="#product">Product</a>
+        <a href="#values">Values</a>
+    </div>
 </div>
 
 <!-- ─── HERO ─── -->
 <section class="hero" id="home">
     <div class="hero-bg-accent"></div>
     <div class="hero-bg-line"></div>
-
-    <span class="hero-label">Beef Tallow &mdash; Small Batch Production</span>
+    <div class="hero-image">
+        <img src="brand-assets/beef%20tallow%20hero%20image.png" alt="VERU beef tallow product">
+    </div>
 
     <h1 class="hero-title">
         Real products,<br>from <em>natural</em><br>sources.
@@ -780,6 +966,7 @@
 <section id="product">
     <div class="product-grid">
         <div class="product-visual reveal-left">
+            <img src="https://placehold.co/600x800/C2A98A/F5F1E8?text=Product+Photo" alt="VERU Tallow product photo placeholder">
             <div class="product-visual-glow"></div>
             <div class="product-visual-label">
                 <div class="product-visual-name">VERU</div>
@@ -802,30 +989,6 @@
                 <li>Mid-tier, fair pricing</li>
             </ul>
             <a href="#order" class="btn-primary reveal delay-4"><span>Order Your Jar</span></a>
-        </div>
-    </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- ─── STORY ─── -->
-<section class="story-section" id="story">
-    <span class="section-label reveal">The Story</span>
-    <blockquote class="story-quote reveal delay-1">
-        "Made in small batches from locally sourced beef fat. Slowly rendered, nothing added, nothing removed."
-    </blockquote>
-    <div class="story-stats">
-        <div class="story-stat reveal delay-1">
-            <div class="stat-value">100%</div>
-            <div class="stat-label">Natural — no additives</div>
-        </div>
-        <div class="story-stat reveal delay-2">
-            <div class="stat-value">Local</div>
-            <div class="stat-label">Sourced &amp; produced</div>
-        </div>
-        <div class="story-stat reveal delay-3">
-            <div class="stat-value">0</div>
-            <div class="stat-label">Fillers or shortcuts</div>
         </div>
     </div>
 </section>
@@ -861,16 +1024,41 @@
 
 <div class="divider"></div>
 
-<!-- ─── CTA ─── -->
-<section class="cta-section" id="order">
-    <span class="section-label reveal" style="display:block;">Ready to Order</span>
-    <h2 class="cta-title reveal delay-1">Experience the<br><em>real thing.</em></h2>
-    <p class="cta-text reveal delay-2">
-        VERU Tallow. Made locally, rendered slowly, priced fairly.
-        Get in touch to place your order or ask us anything.
-    </p>
-    <div class="reveal delay-3">
-        <a href="mailto:hello@veru.co" class="btn-primary"><span>Get in Touch</span></a>
+<!-- ─── ORDER ─── -->
+<section class="order-section" id="order">
+    <div class="order-inner">
+        <div class="order-heading reveal">
+            <span class="section-label">Order</span>
+            <h2 class="order-title">Place your<br><em>order.</em></h2>
+        </div>
+
+        <div class="order-card reveal delay-2">
+            <!-- Product row -->
+            <div class="order-product-row">
+                <div>
+                    <span class="order-product-tag">In Stock</span>
+                    <h3 class="order-product-name">VERU Tallow</h3>
+                    <p class="order-product-desc">Small batch, locally sourced beef tallow. Slow-rendered for purity — no additives, no shortcuts.</p>
+                </div>
+            </div>
+
+            <!-- Controls row -->
+            <div class="order-controls-row">
+                <div class="order-qty-group">
+                    <span class="order-qty-label">Quantity</span>
+                    <div class="qty-stepper">
+                        <button class="qty-btn" id="qty-minus" aria-label="Decrease quantity">−</button>
+                        <span class="qty-value" id="qty-value">1</span>
+                        <button class="qty-btn" id="qty-plus" aria-label="Increase quantity">+</button>
+                    </div>
+                </div>
+
+                <div class="order-action-group">
+                    <a href="#" class="btn-primary" id="order-btn"><span>Place Order</span></a>
+                    <p class="order-note">We'll confirm your order via email.</p>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 
@@ -888,7 +1076,6 @@
             <p class="footer-col-title">Navigate</p>
             <ul class="footer-links">
                 <li><a href="#product">Product</a></li>
-                <li><a href="#story">Story</a></li>
                 <li><a href="#values">Values</a></li>
                 <li><a href="#order">Order</a></li>
             </ul>
@@ -907,50 +1094,31 @@
 </footer>
 
 <script>
-    // ─── Animated floating nav (mirrors framer-motion React component logic) ───
-    const fnavWrap = document.getElementById('fnav-wrap');
-    const fnav     = document.getElementById('fnav');
 
-    // Measure expanded width once after paint so transition works correctly
-    let expandedWidth = fnav.scrollWidth + 'px';
-    fnav.style.width = expandedWidth;
+    // ─── Mobile burger menu ───
+    const burger = document.getElementById('fnav-burger');
+    const mobileMenu = document.getElementById('fnav-mobile-menu');
 
-    let isExpanded = true;
-    let lastScrollY = 0;
-    let scrollYOnCollapse = 0;
-    const COLLAPSE_THRESHOLD = 150;   // px scrolled before collapsing
-    const EXPAND_THRESHOLD   = 80;    // px scrolled back up before re-expanding
+    burger.addEventListener('click', () => {
+        const isOpen = mobileMenu.classList.toggle('open');
+        burger.classList.toggle('open', isOpen);
+        burger.setAttribute('aria-expanded', isOpen);
+    });
 
-    function setExpanded(val) {
-        isExpanded = val;
-        if (val) {
-            // Re-measure in case viewport changed
-            fnav.style.width = 'auto';
-            requestAnimationFrame(() => {
-                expandedWidth = fnav.scrollWidth + 'px';
-                fnav.style.width = expandedWidth;
-            });
-            fnavWrap.classList.remove('collapsed');
-        } else {
-            fnav.style.width = '48px';
-            fnavWrap.classList.add('collapsed');
-            scrollYOnCollapse = window.scrollY;
+    mobileMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            mobileMenu.classList.remove('open');
+            burger.classList.remove('open');
+            burger.setAttribute('aria-expanded', false);
+        });
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('#fnav-wrap')) {
+            mobileMenu.classList.remove('open');
+            burger.classList.remove('open');
+            burger.setAttribute('aria-expanded', false);
         }
-    }
-
-    window.addEventListener('scroll', () => {
-        const y = window.scrollY;
-        if (isExpanded && y > lastScrollY && y > COLLAPSE_THRESHOLD) {
-            setExpanded(false);
-        } else if (!isExpanded && y < lastScrollY && (scrollYOnCollapse - y) > EXPAND_THRESHOLD) {
-            setExpanded(true);
-        }
-        lastScrollY = y;
-    }, { passive: true });
-
-    // Click collapsed pill to expand
-    fnav.addEventListener('click', () => {
-        if (!isExpanded) setExpanded(true);
     });
 
     // ─── Scroll reveal ───
@@ -969,6 +1137,25 @@
     });
 
     revealEls.forEach(el => revealObserver.observe(el));
+
+    // ─── Order quantity stepper ───
+    const qtyMinus = document.getElementById('qty-minus');
+    const qtyPlus  = document.getElementById('qty-plus');
+    const qtyValue = document.getElementById('qty-value');
+    const orderBtn = document.getElementById('order-btn');
+    let qty = 1;
+
+    function updateOrder() {
+        qtyValue.textContent = qty;
+        qtyMinus.disabled = qty <= 1;
+        const subject = encodeURIComponent('VERU Tallow Order');
+        const body = encodeURIComponent(`Hi,\n\nI'd like to order:\n\n  • VERU Tallow × ${qty}\n\nPlease let me know next steps.\n\nThanks`);
+        orderBtn.href = `mailto:hello@veru.co?subject=${subject}&body=${body}`;
+    }
+
+    qtyMinus.addEventListener('click', () => { if (qty > 1) { qty--; updateOrder(); } });
+    qtyPlus.addEventListener('click',  () => { qty++; updateOrder(); });
+    updateOrder();
 
     // ─── Smooth anchor scroll ───
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
