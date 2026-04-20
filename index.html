@@ -30,96 +30,139 @@
             overflow-x: hidden;
         }
 
-        /* ─── HEADER ─── */
-        header {
+        /* ─── FLOATING NAV ─── */
+        .fnav-wrap {
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
+            top: 24px;
+            left: 50%;
+            transform: translateX(-50%);
             z-index: 100;
-            padding: 28px 64px;
+            /* entrance animation */
+            animation: navDrop 0.7s cubic-bezier(0.22,1,0.36,1) 0.1s both;
+        }
+
+        @keyframes navDrop {
+            from { opacity: 0; transform: translateX(-50%) translateY(-48px); }
+            to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+        }
+
+        .fnav {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            transition: padding 0.45s ease, background 0.45s ease, box-shadow 0.45s ease;
-        }
-
-        header.scrolled {
-            background: rgba(245, 241, 232, 0.96);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            padding: 18px 64px;
-            box-shadow: 0 1px 0 rgba(30, 30, 30, 0.1), 0 4px 32px rgba(30, 30, 30, 0.06);
-        }
-
-        .logo {
-            font-family: Georgia, 'Times New Roman', serif;
-            font-size: 1.6rem;
-            font-weight: normal;
-            letter-spacing: 0.28em;
-            color: var(--charcoal);
-            text-decoration: none;
-            transition: opacity 0.3s ease;
-        }
-
-        .logo:hover { opacity: 0.65; }
-
-        nav {
-            display: flex;
-            gap: 44px;
-            align-items: center;
-        }
-
-        nav a {
-            text-decoration: none;
-            color: var(--charcoal);
-            font-size: 0.78rem;
-            letter-spacing: 0.13em;
-            text-transform: uppercase;
-            position: relative;
-            transition: color 0.3s ease;
-        }
-
-        nav a:not(.nav-cta)::after {
-            content: '';
-            position: absolute;
-            bottom: -3px;
-            left: 0;
-            width: 0;
-            height: 1px;
-            background: var(--beige);
-            transition: width 0.35s ease;
-        }
-
-        nav a:not(.nav-cta):hover::after { width: 100%; }
-        nav a:not(.nav-cta):hover { color: var(--beige); }
-
-        .nav-cta {
-            background: var(--charcoal);
-            color: var(--cream) !important;
-            padding: 10px 26px;
-            font-size: 0.75rem;
-            letter-spacing: 0.13em;
-            text-transform: uppercase;
-            position: relative;
+            height: 48px;
+            border-radius: 9999px;
+            border: 1px solid rgba(30,30,30,0.13);
+            background: rgba(245, 241, 232, 0.82);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            box-shadow: 0 4px 32px rgba(30,30,30,0.09), 0 1px 0 rgba(255,255,255,0.6) inset;
             overflow: hidden;
-            transition: color 0.35s ease;
+            /* spring-like transition using cubic-bezier */
+            transition:
+                width 0.55s cubic-bezier(0.34, 1.56, 0.64, 1),
+                box-shadow 0.35s ease;
+            white-space: nowrap;
         }
 
-        .nav-cta::before {
-            content: '';
+        .fnav:hover { box-shadow: 0 8px 40px rgba(30,30,30,0.13), 0 1px 0 rgba(255,255,255,0.6) inset; }
+
+        /* ── Expanded state ── */
+        .fnav-logo {
+            display: flex;
+            align-items: center;
+            flex-shrink: 0;
+            padding: 0 10px 0 20px;
+            transition: opacity 0.25s ease, transform 0.35s cubic-bezier(0.34,1.56,0.64,1);
+        }
+
+        .fnav-logo svg { width: 20px; height: 20px; stroke: var(--charcoal); }
+
+        .fnav-links {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding-right: 16px;
+            transition: opacity 0.25s ease, transform 0.35s cubic-bezier(0.34,1.56,0.64,1);
+        }
+
+        .fnav-links a {
+            text-decoration: none;
+            color: var(--charcoal);
+            font-size: 0.76rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 6px 12px;
+            opacity: 0.65;
+            transition: opacity 0.25s ease, color 0.25s ease;
+            position: relative;
+        }
+
+        .fnav-links a:hover { opacity: 1; color: var(--beige); }
+
+        .fnav-cta {
+            display: flex;
+            align-items: center;
+            flex-shrink: 0;
+            margin-right: 6px;
+        }
+
+        .fnav-cta a {
+            background: var(--charcoal);
+            color: var(--cream);
+            font-size: 0.72rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            text-decoration: none;
+            padding: 8px 18px;
+            border-radius: 9999px;
+            transition: background 0.3s ease, color 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .fnav-cta a:hover { background: var(--beige); color: var(--charcoal); }
+
+        /* ── Collapsed state ── */
+        .fnav-menu-icon {
             position: absolute;
             inset: 0;
-            background: var(--beige);
-            transform: translateX(-100%);
-            transition: transform 0.4s ease;
-            z-index: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+            opacity: 0;
+            transform: scale(0.7) rotate(90deg);
+            transition: opacity 0.25s ease 0.1s, transform 0.35s cubic-bezier(0.34,1.56,0.64,1) 0.1s;
         }
 
-        .nav-cta span { position: relative; z-index: 1; }
+        .fnav-menu-icon svg { width: 20px; height: 20px; stroke: var(--charcoal); }
 
-        .nav-cta:hover::before { transform: translateX(0); }
-        .nav-cta:hover { color: var(--charcoal) !important; }
+        /* ── JS-toggled classes ── */
+        .fnav-wrap.collapsed .fnav { cursor: pointer; }
+        .fnav-wrap.collapsed .fnav:active { transform: scale(0.93); }
+
+        .fnav-wrap.collapsed .fnav-logo {
+            opacity: 0;
+            transform: translateX(-16px) rotate(-90deg);
+            pointer-events: none;
+        }
+
+        .fnav-wrap.collapsed .fnav-links {
+            opacity: 0;
+            transform: translateX(-12px);
+            pointer-events: none;
+        }
+
+        .fnav-wrap.collapsed .fnav-cta {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease;
+        }
+
+        .fnav-wrap.collapsed .fnav-menu-icon {
+            opacity: 1;
+            transform: scale(1) rotate(0deg);
+            pointer-events: none;
+        }
 
         /* ─── HERO ─── */
         .hero {
@@ -648,8 +691,7 @@
 
         /* ─── RESPONSIVE ─── */
         @media (max-width: 960px) {
-            header, section, footer, .footer-inner { padding-left: 32px; padding-right: 32px; }
-            header.scrolled { padding-left: 32px; padding-right: 32px; }
+            section, footer, .footer-inner { padding-left: 32px; padding-right: 32px; }
             .hero { padding-left: 32px; padding-right: 32px; }
             .hero-scroll-hint { left: 32px; }
             .product-grid { grid-template-columns: 1fr; gap: 52px; }
@@ -661,13 +703,11 @@
             .value-card { border-right: none; border-bottom: 1px solid rgba(30,30,30,0.09); }
             .value-card:last-child { border-bottom: none; }
             .footer-inner { grid-template-columns: 1fr 1fr; }
+            /* hide text links on small screens, show only logo + order */
+            .fnav-links a:not(:last-child) { display: none; }
         }
 
         @media (max-width: 600px) {
-            header { padding: 20px 24px; }
-            header.scrolled { padding: 14px 24px; }
-            nav { gap: 20px; }
-            nav a:not(.nav-cta):not(:last-of-type) { display: none; }
             .hero { padding: 110px 24px 80px; }
             .hero-scroll-hint { left: 24px; }
             section { padding: 80px 24px; }
@@ -680,16 +720,35 @@
 </head>
 <body>
 
-<!-- ─── HEADER ─── -->
-<header id="site-header">
-    <a href="#" class="logo">VERU</a>
-    <nav>
-        <a href="#product">Product</a>
-        <a href="#story">Story</a>
-        <a href="#values">Values</a>
-        <a href="#order" class="nav-cta"><span>Order Now</span></a>
+<!-- ─── FLOATING NAV ─── -->
+<div class="fnav-wrap" id="fnav-wrap">
+    <nav class="fnav" id="fnav">
+        <!-- Logo icon (Navigation arrow) -->
+        <div class="fnav-logo">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="3 11 22 2 13 21 11 13 3 11"/>
+            </svg>
+        </div>
+        <!-- Nav links -->
+        <div class="fnav-links">
+            <a href="#product">Product</a>
+            <a href="#story">Story</a>
+            <a href="#values">Values</a>
+        </div>
+        <!-- CTA button -->
+        <div class="fnav-cta">
+            <a href="#order">Order Now</a>
+        </div>
+        <!-- Collapsed menu icon (shown when collapsed) -->
+        <div class="fnav-menu-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="4" y1="6" x2="20" y2="6"/>
+                <line x1="4" y1="12" x2="20" y2="12"/>
+                <line x1="4" y1="18" x2="20" y2="18"/>
+            </svg>
+        </div>
     </nav>
-</header>
+</div>
 
 <!-- ─── HERO ─── -->
 <section class="hero" id="home">
@@ -850,15 +909,51 @@
 </footer>
 
 <script>
-    // ─── Floating header on scroll ───
-    const header = document.getElementById('site-header');
-    let lastScroll = 0;
+    // ─── Animated floating nav (mirrors framer-motion React component logic) ───
+    const fnavWrap = document.getElementById('fnav-wrap');
+    const fnav     = document.getElementById('fnav');
+
+    // Measure expanded width once after paint so transition works correctly
+    let expandedWidth = fnav.scrollWidth + 'px';
+    fnav.style.width = expandedWidth;
+
+    let isExpanded = true;
+    let lastScrollY = 0;
+    let scrollYOnCollapse = 0;
+    const COLLAPSE_THRESHOLD = 150;   // px scrolled before collapsing
+    const EXPAND_THRESHOLD   = 80;    // px scrolled back up before re-expanding
+
+    function setExpanded(val) {
+        isExpanded = val;
+        if (val) {
+            // Re-measure in case viewport changed
+            fnav.style.width = 'auto';
+            requestAnimationFrame(() => {
+                expandedWidth = fnav.scrollWidth + 'px';
+                fnav.style.width = expandedWidth;
+            });
+            fnavWrap.classList.remove('collapsed');
+        } else {
+            fnav.style.width = '48px';
+            fnavWrap.classList.add('collapsed');
+            scrollYOnCollapse = window.scrollY;
+        }
+    }
 
     window.addEventListener('scroll', () => {
         const y = window.scrollY;
-        header.classList.toggle('scrolled', y > 60);
-        lastScroll = y;
+        if (isExpanded && y > lastScrollY && y > COLLAPSE_THRESHOLD) {
+            setExpanded(false);
+        } else if (!isExpanded && y < lastScrollY && (scrollYOnCollapse - y) > EXPAND_THRESHOLD) {
+            setExpanded(true);
+        }
+        lastScrollY = y;
     }, { passive: true });
+
+    // Click collapsed pill to expand
+    fnav.addEventListener('click', () => {
+        if (!isExpanded) setExpanded(true);
+    });
 
     // ─── Scroll reveal ───
     const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
@@ -883,8 +978,7 @@
             const target = document.querySelector(anchor.getAttribute('href'));
             if (target) {
                 e.preventDefault();
-                const offset = header.offsetHeight + 16;
-                const top = target.getBoundingClientRect().top + window.scrollY - offset;
+                const top = target.getBoundingClientRect().top + window.scrollY - 80;
                 window.scrollTo({ top, behavior: 'smooth' });
             }
         });
@@ -897,12 +991,8 @@
     window.addEventListener('scroll', () => {
         const y = window.scrollY;
         if (y < window.innerHeight) {
-            if (heroTitle) {
-                heroTitle.style.transform = `translateY(${y * 0.12}px)`;
-            }
-            if (heroBgLine) {
-                heroBgLine.style.transform = `translateY(${y * 0.06}px)`;
-            }
+            if (heroTitle) heroTitle.style.transform = `translateY(${y * 0.12}px)`;
+            if (heroBgLine) heroBgLine.style.transform = `translateY(${y * 0.06}px)`;
         }
     }, { passive: true });
 </script>
