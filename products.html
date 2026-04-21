@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VERU — Products</title>
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --cream: #F5F1E8;
+            --charcoal: #1E1E1E;
+            --olive: #6E7F64;
+            --beige: #C2A98A;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--cream);
+            color: var(--charcoal);
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ─── FLOATING NAV ─── */
+        .fnav-wrap {
+            position: fixed;
+            top: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+            animation: navDrop 0.7s cubic-bezier(0.22,1,0.36,1) 0.1s both;
+        }
+
+        @keyframes navDrop {
+            from { opacity: 0; transform: translateX(-50%) translateY(-48px); }
+            to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+        }
+
+        .fnav {
+            display: flex;
+            align-items: center;
+            height: 48px;
+            border-radius: 9999px;
+            border: 1px solid rgba(30,30,30,0.13);
+            background: rgba(245, 241, 232, 0.82);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            box-shadow: 0 4px 32px rgba(30,30,30,0.09), 0 1px 0 rgba(255,255,255,0.6) inset;
+            overflow: hidden;
+            transition: box-shadow 0.35s ease;
+            white-space: nowrap;
+        }
+
+        .fnav:hover { box-shadow: 0 8px 40px rgba(30,30,30,0.13), 0 1px 0 rgba(255,255,255,0.6) inset; }
+
+        .fnav-logo {
+            display: flex;
+            align-items: center;
+            flex-shrink: 0;
+            padding: 0 10px 0 20px;
+        }
+
+        .fnav-links {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding-right: 16px;
+        }
+
+        .fnav-links a {
+            text-decoration: none;
+            color: var(--charcoal);
+            font-size: 0.76rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 6px 12px;
+            opacity: 0.65;
+            transition: opacity 0.25s ease, color 0.25s ease;
+        }
+
+        .fnav-links a:hover { opacity: 1; color: var(--beige); }
+        .fnav-links a.active { opacity: 1; color: var(--charcoal); }
+
+        .fnav-cta {
+            display: flex;
+            align-items: center;
+            flex-shrink: 0;
+            margin-right: 6px;
+        }
+
+        .fnav-cta a {
+            background: var(--charcoal);
+            color: var(--cream);
+            font-size: 0.72rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            text-decoration: none;
+            padding: 8px 18px;
+            border-radius: 9999px;
+            transition: background 0.3s ease, color 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .fnav-cta a:hover { background: var(--beige); color: var(--charcoal); }
+
+        /* ─── PAGE BANNER ─── */
+        .page-banner {
+            position: relative;
+            width: 100%;
+            height: 72vh;
+            min-height: 440px;
+            overflow: hidden;
+        }
+
+        .page-banner-img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            animation: bannerReveal 1.4s cubic-bezier(0.22,1,0.36,1) both;
+        }
+
+        @keyframes bannerReveal {
+            from { opacity: 0; transform: scale(1.05); }
+            to   { opacity: 1; transform: scale(1); }
+        }
+
+        .page-banner-fade {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 55%;
+            background: linear-gradient(to bottom, transparent 0%, var(--cream) 100%);
+            pointer-events: none;
+        }
+
+        .page-banner-label {
+            position: absolute;
+            bottom: 32px;
+            left: 64px;
+            font-size: 0.7rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--olive);
+            opacity: 0;
+            transform: translateY(14px);
+            animation: fadeUp 0.7s ease 0.7s forwards;
+        }
+
+        @media (max-width: 960px) {
+            .page-banner { height: 60vh; }
+            .page-banner-label { left: 32px; }
+        }
+
+        @media (max-width: 600px) {
+            .page-banner { height: 50vh; min-height: 320px; }
+            .page-banner-label { left: 24px; bottom: 24px; }
+        }
+
+        /* ─── PRODUCT ANCHOR NAV ─── */
+        .product-nav {
+            display: flex;
+            gap: 0;
+            border-top: 1px solid rgba(30,30,30,0.08);
+            border-bottom: 1px solid rgba(30,30,30,0.08);
+            padding: 0 64px;
+            background: var(--cream);
+            position: sticky;
+            top: 72px;
+            z-index: 50;
+        }
+
+        .product-nav a {
+            text-decoration: none;
+            color: var(--charcoal);
+            font-size: 0.72rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            padding: 16px 28px 14px;
+            opacity: 0.45;
+            border-bottom: 2px solid transparent;
+            transition: opacity 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+        }
+
+        .product-nav a:hover { opacity: 1; border-color: var(--beige); color: var(--beige); }
+
+        /* ─── CATEGORY SECTION ─── */
+        .category-section {
+            padding: 80px 64px 100px;
+        }
+
+        .category-section + .category-section {
+            border-top: 1px solid rgba(30,30,30,0.08);
+        }
+
+        .category-header {
+            margin-bottom: 52px;
+        }
+
+        .category-label {
+            font-size: 0.68rem;
+            letter-spacing: 0.32em;
+            text-transform: uppercase;
+            color: var(--olive);
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .category-title {
+            font-family: Georgia, 'Times New Roman', serif;
+            font-size: clamp(1.8rem, 3vw, 2.6rem);
+            font-weight: normal;
+            line-height: 1.1;
+            letter-spacing: -0.01em;
+        }
+
+        /* ─── PRODUCT GRID ─── */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+
+        /* ─── PRODUCT CARD ─── */
+        .product-card {
+            display: flex;
+            flex-direction: column;
+            border: 1px solid rgba(30,30,30,0.1);
+            overflow: hidden;
+            transition: box-shadow 0.35s ease, transform 0.35s cubic-bezier(0.22,1,0.36,1);
+        }
+
+        .product-card:hover {
+            box-shadow: 0 12px 48px rgba(30,30,30,0.1);
+            transform: translateY(-4px);
+        }
+
+        .product-card-image {
+            aspect-ratio: 4/3;
+            background: linear-gradient(145deg, #ede3d4 0%, #d9c9b3 50%, #c8ae94 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-card-image img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .product-card-image-glow {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 25% 25%, rgba(255,255,255,0.28) 0%, transparent 55%),
+                radial-gradient(ellipse at 75% 75%, rgba(30,30,30,0.07) 0%, transparent 45%);
+            pointer-events: none;
+        }
+
+        .product-card-body {
+            padding: 28px 28px 32px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .product-card-tag {
+            display: inline-block;
+            font-size: 0.62rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--olive);
+            border: 1px solid var(--olive);
+            padding: 3px 9px;
+            border-radius: 9999px;
+            margin-bottom: 14px;
+            width: fit-content;
+        }
+
+        .product-card-tag.coming-soon {
+            color: var(--beige);
+            border-color: var(--beige);
+            opacity: 0.7;
+        }
+
+        .product-card-name {
+            font-family: Georgia, 'Times New Roman', serif;
+            font-size: 1.3rem;
+            font-weight: normal;
+            line-height: 1.2;
+            margin-bottom: 12px;
+        }
+
+        .product-card-desc {
+            font-size: 0.83rem;
+            color: #6a6460;
+            line-height: 1.85;
+            margin-bottom: 28px;
+            flex: 1;
+        }
+
+        .product-card-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--charcoal);
+            font-size: 0.74rem;
+            letter-spacing: 0.13em;
+            text-transform: uppercase;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(30,30,30,0.25);
+            padding-bottom: 3px;
+            width: fit-content;
+            transition: gap 0.35s ease, border-color 0.35s ease, color 0.35s ease;
+        }
+
+        .product-card-cta:hover {
+            gap: 18px;
+            border-color: var(--beige);
+            color: var(--beige);
+        }
+
+        .product-card-cta.disabled {
+            opacity: 0.35;
+            pointer-events: none;
+        }
+
+        /* ─── WHY STRIP ─── */
+        .why-strip {
+            padding: 40px 64px;
+            background: var(--charcoal);
+            color: var(--cream);
+            display: flex;
+            align-items: flex-start;
+            gap: 64px;
+        }
+
+        .why-strip-left {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            flex-shrink: 0;
+        }
+
+        .why-strip-deco svg { width: 40px; height: 54px; }
+
+        .why-strip-heading {
+            font-family: Georgia, serif;
+            font-size: 1rem;
+            font-weight: normal;
+            font-style: italic;
+            color: var(--beige);
+            white-space: nowrap;
+            padding-top: 2px;
+        }
+
+        .why-strip-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px 40px;
+            flex: 1;
+        }
+
+        .why-strip-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .why-strip-icon {
+            width: 14px;
+            height: 14px;
+            color: var(--beige);
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .why-strip-item-title {
+            font-family: Georgia, serif;
+            font-size: 0.82rem;
+            font-weight: normal;
+            color: var(--cream);
+            display: block;
+            line-height: 1.4;
+        }
+
+        .why-strip-item-desc {
+            font-size: 0.75rem;
+            color: rgba(245,241,232,0.45);
+            line-height: 1.5;
+            display: block;
+        }
+
+        @media (max-width: 960px) {
+            .why-strip { padding: 36px 32px; flex-direction: column; gap: 28px; }
+            .why-strip-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 600px) {
+            .why-strip { padding: 32px 24px; }
+            .why-strip-grid { grid-template-columns: 1fr; }
+        }
+
+        /* ─── FOOTER ─── */
+        .footer-section {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        footer {
+            border-top: 1px solid rgba(245,241,232,0.08);
+            background: var(--charcoal);
+            color: var(--cream);
+            position: relative;
+        }
+
+        .footer-inner {
+            max-width: 1120px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 60px 24px 40px;
+            position: relative;
+            z-index: 5;
+        }
+
+        .footer-brand { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+
+        .footer-logo {
+            font-family: Georgia, serif;
+            font-size: 2rem;
+            letter-spacing: 0.25em;
+            font-weight: normal;
+            color: var(--cream);
+        }
+
+        .footer-tagline {
+            font-size: 0.88rem;
+            color: rgba(245,241,232,0.5);
+            text-align: center;
+            max-width: 24rem;
+            line-height: 1.7;
+        }
+
+        .footer-bottom {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            margin-top: 32px;
+            position: relative;
+            z-index: 5;
+        }
+
+        .footer-bottom p {
+            font-size: 0.78rem;
+            color: rgba(245,241,232,0.3);
+            letter-spacing: 0.05em;
+        }
+
+        .footer-bg-text {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 0;
+            font-family: Georgia, serif;
+            font-size: clamp(4rem, 16vw, 12rem);
+            font-weight: 900;
+            letter-spacing: -0.02em;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.05) 55%, transparent 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            pointer-events: none;
+            user-select: none;
+            white-space: nowrap;
+            text-align: center;
+            line-height: 1;
+            z-index: 0;
+        }
+
+        /* ─── ANIMATIONS ─── */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1);
+        }
+
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        .delay-1 { transition-delay: 0.1s; }
+        .delay-2 { transition-delay: 0.2s; }
+        .delay-3 { transition-delay: 0.3s; }
+
+        /* ─── BURGER ─── */
+        .fnav-burger {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            padding: 0;
+            margin-right: 6px;
+            flex-shrink: 0;
+        }
+
+        .fnav-burger-bar {
+            display: block;
+            position: relative;
+            width: 18px;
+            height: 1.5px;
+            background: var(--charcoal);
+            transition: background 0.25s ease;
+        }
+
+        .fnav-burger-bar::before, .fnav-burger-bar::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--charcoal);
+            transition: transform 0.3s cubic-bezier(0.22,1,0.36,1), top 0.3s cubic-bezier(0.22,1,0.36,1), opacity 0.2s ease;
+        }
+
+        .fnav-burger-bar::before { top: -5px; }
+        .fnav-burger-bar::after  { top:  5px; }
+
+        .fnav-burger.open .fnav-burger-bar { background: transparent; }
+        .fnav-burger.open .fnav-burger-bar::before { top: 0; transform: rotate(45deg); }
+        .fnav-burger.open .fnav-burger-bar::after  { top: 0; transform: rotate(-45deg); }
+
+        .fnav-mobile-menu {
+            display: none;
+            flex-direction: column;
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 50%;
+            transform: translateX(-50%) translateY(-10px);
+            background: rgba(245,241,232,0.96);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid rgba(30,30,30,0.13);
+            border-radius: 20px;
+            box-shadow: 0 8px 40px rgba(30,30,30,0.12);
+            min-width: 180px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease, transform 0.32s cubic-bezier(0.22,1,0.36,1);
+            overflow: hidden;
+        }
+
+        .fnav-mobile-menu.open {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+            pointer-events: auto;
+        }
+
+        .fnav-mobile-menu a {
+            text-decoration: none;
+            color: var(--charcoal);
+            font-size: 0.76rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            padding: 16px 28px;
+            opacity: 0.65;
+            transition: opacity 0.2s ease, background 0.2s ease, color 0.2s ease;
+            border-bottom: 1px solid rgba(30,30,30,0.07);
+        }
+
+        .fnav-mobile-menu a:last-child { border-bottom: none; }
+        .fnav-mobile-menu a:hover { opacity: 1; color: var(--beige); background: rgba(194,169,138,0.07); }
+
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 960px) {
+            .page-hero { padding-left: 32px; padding-right: 32px; }
+            .product-nav { padding: 0 32px; }
+            .category-section { padding: 64px 32px 80px; }
+            .product-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+            .fnav-links { display: none; }
+            .fnav-burger { display: flex; }
+            .fnav-mobile-menu { display: flex; }
+        }
+
+        @media (max-width: 600px) {
+            .page-hero { padding: 120px 24px 36px; }
+            .product-nav { padding: 0 24px; overflow-x: auto; }
+            .category-section { padding: 52px 24px 64px; }
+            .product-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ─── FLOATING NAV ─── -->
+<div class="fnav-wrap" id="fnav-wrap">
+    <nav class="fnav" id="fnav">
+        <div class="fnav-logo">
+            <a href="index.html" style="font-family: Georgia, serif; font-size: 1.1rem; letter-spacing: 0.28em; color: var(--charcoal); text-decoration: none;">VERU</a>
+        </div>
+        <div class="fnav-links">
+            <a href="products.html" class="active">Products</a>
+            <a href="index.html#values">About Us</a>
+        </div>
+        <div class="fnav-cta">
+            <a href="index.html#order">Order Now</a>
+        </div>
+        <button class="fnav-burger" id="fnav-burger" aria-label="Open menu" aria-expanded="false">
+            <span class="fnav-burger-bar"></span>
+        </button>
+    </nav>
+    <div class="fnav-mobile-menu" id="fnav-mobile-menu">
+        <a href="products.html">Products</a>
+        <a href="index.html#values">About Us</a>
+        <a href="index.html#order">Order Now</a>
+    </div>
+</div>
+
+<!-- ─── PAGE BANNER ─── -->
+<div class="page-banner">
+    <img src="brand-assets/products banner.png" alt="VERU Products" class="page-banner-img">
+    <div class="page-banner-fade"></div>
+    <span class="page-banner-label">Products</span>
+</div>
+
+<!-- ══════════════════════════════════════
+     TALLOW
+══════════════════════════════════════ -->
+<section class="category-section" id="tallow">
+    <div class="category-header reveal">
+<h2 class="category-title">Tallow</h2>
+    </div>
+    <div class="product-grid">
+
+        <!-- Tallow 01 — existing product -->
+        <div class="product-card reveal delay-1">
+            <div class="product-card-image">
+                <img src="https://placehold.co/600x800/C2A98A/F5F1E8?text=VERU+Tallow" alt="VERU Tallow">
+                <div class="product-card-image-glow"></div>
+            </div>
+            <div class="product-card-body">
+                <span class="product-card-tag">In Stock</span>
+                <h3 class="product-card-name">VERU Tallow</h3>
+                <p class="product-card-desc">Small batch, locally sourced beef tallow. Slow-rendered for purity — no additives, no shortcuts.</p>
+                <a href="index.html#order" class="product-card-cta">Order Now →</a>
+            </div>
+        </div>
+
+        <!-- Tallow 02 — placeholder -->
+        <div class="product-card reveal delay-2">
+            <div class="product-card-image">
+                <img src="https://placehold.co/600x800/C2A98A/F5F1E8?text=Coming+Soon" alt="VERU Tallow — Whipped">
+                <div class="product-card-image-glow"></div>
+            </div>
+            <div class="product-card-body">
+                <span class="product-card-tag coming-soon">Coming Soon</span>
+                <h3 class="product-card-name">VERU Tallow — Whipped</h3>
+                <p class="product-card-desc">The same pure beef tallow, whipped to a light, spreadable texture. Perfect for cooking and skin use.</p>
+                <span class="product-card-cta disabled">Notify Me →</span>
+            </div>
+        </div>
+
+        <!-- Tallow 03 — placeholder -->
+        <div class="product-card reveal delay-3">
+            <div class="product-card-image">
+                <img src="https://placehold.co/600x800/C2A98A/F5F1E8?text=Coming+Soon" alt="VERU Tallow — Infused">
+                <div class="product-card-image-glow"></div>
+            </div>
+            <div class="product-card-body">
+                <span class="product-card-tag coming-soon">Coming Soon</span>
+                <h3 class="product-card-name">VERU Tallow — Infused</h3>
+                <p class="product-card-desc">Slow-rendered beef tallow infused with natural herbs. Rich flavour, clean ingredients — nothing else.</p>
+                <span class="product-card-cta disabled">Notify Me →</span>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- ─── TALLOW WHY ─── -->
+<div class="why-strip reveal">
+    <div class="why-strip-left">
+        <div class="why-strip-deco" aria-hidden="true">
+            <svg viewBox="0 0 96 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M48 4C24 36 6 64 6 88C6 110 25 124 48 124C71 124 90 110 90 88C90 64 72 36 48 4Z" stroke="rgba(194,169,138,0.35)" stroke-width="1.5"/>
+                <path d="M48 28C34 52 22 72 22 88C22 102 33 114 48 114C63 114 74 102 74 88C74 72 62 52 48 28Z" stroke="rgba(194,169,138,0.2)" stroke-width="1"/>
+                <path d="M48 54C40 68 36 80 36 88C36 96 41 102 48 102C55 102 60 96 60 88C60 80 56 68 48 54Z" stroke="rgba(194,169,138,0.12)" stroke-width="1"/>
+            </svg>
+        </div>
+        <span class="why-strip-heading">Why cook with beef tallow?</span>
+    </div>
+    <div class="why-strip-grid">
+        <div class="why-strip-item">
+            <svg class="why-strip-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                <line x1="12" y1="2" x2="12" y2="14"/><circle cx="12" cy="17" r="3"/>
+            </svg>
+            <div>
+                <span class="why-strip-item-title">High Smoke Point</span>
+                <span class="why-strip-item-desc">Stable above 200°C, no harmful compounds.</span>
+            </div>
+        </div>
+        <div class="why-strip-item">
+            <svg class="why-strip-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2L4 6v6c0 5 4 9 8 10 4-1 8-5 8-10V6L12 2z"/><path d="M9 12l2 2 4-4"/>
+            </svg>
+            <div>
+                <span class="why-strip-item-title">No Seed Oils</span>
+                <span class="why-strip-item-desc">Pure rendered fat, nothing added.</span>
+            </div>
+        </div>
+        <div class="why-strip-item">
+            <svg class="why-strip-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                <path d="M12 2C8 8 5 13 5 16a7 7 0 0014 0c0-3-3-8-7-14z"/>
+            </svg>
+            <div>
+                <span class="why-strip-item-title">Vitamins A, D, E &amp; K</span>
+                <span class="why-strip-item-desc">Fat-soluble nutrients your body absorbs.</span>
+            </div>
+        </div>
+        <div class="why-strip-item">
+            <svg class="why-strip-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                <line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/>
+                <line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/>
+                <line x1="4.9" y1="4.9" x2="7.8" y2="7.8"/><line x1="16.2" y1="16.2" x2="19.1" y2="19.1"/>
+                <line x1="4.9" y1="19.1" x2="7.8" y2="16.2"/><line x1="16.2" y1="7.8" x2="19.1" y2="4.9"/>
+            </svg>
+            <div>
+                <span class="why-strip-item-title">Exceptional Flavour</span>
+                <span class="why-strip-item-desc">Savoury depth no plant oil can replicate.</span>
+            </div>
+        </div>
+        <div class="why-strip-item">
+            <svg class="why-strip-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 2h14M5 22h14M7 2v5l5 5-5 5v5M17 2v5l-5 5 5 5v5"/>
+            </svg>
+            <div>
+                <span class="why-strip-item-title">Long Shelf Life</span>
+                <span class="why-strip-item-desc">Shelf-stable for months, no preservatives.</span>
+            </div>
+        </div>
+        <div class="why-strip-item">
+            <svg class="why-strip-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/>
+                <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
+            </svg>
+            <div>
+                <span class="why-strip-item-title">Conjugated Linoleic Acid</span>
+                <span class="why-strip-item-desc">Linked to reduced inflammation and healthy metabolism.</span>
+            </div>
+        </div>
+        <div class="why-strip-item">
+            <svg class="why-strip-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+            </svg>
+            <div>
+                <span class="why-strip-item-title">Natural Skin Moisturiser</span>
+                <span class="why-strip-item-desc">Mirrors human sebum, no synthetics.</span>
+            </div>
+        </div>
+        <div class="why-strip-item">
+            <svg class="why-strip-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2C8 8 5 13 5 16a7 7 0 0014 0c0-3-3-8-7-14z"/>
+            </svg>
+            <div>
+                <span class="why-strip-item-title">Skin-Safe &amp; Cosmetic Grade</span>
+                <span class="why-strip-item-desc">Pure enough to eat, gentle enough for your face.</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     HONEY
+══════════════════════════════════════ -->
+<section class="category-section" id="honey">
+    <div class="category-header reveal">
+<h2 class="category-title">Honey</h2>
+    </div>
+    <div class="product-grid">
+
+        <!-- Honey 01 — placeholder -->
+        <div class="product-card reveal delay-1">
+            <div class="product-card-image">
+                <img src="https://placehold.co/600x800/C2A98A/F5F1E8?text=Coming+Soon" alt="VERU Raw Honey">
+                <div class="product-card-image-glow"></div>
+            </div>
+            <div class="product-card-body">
+                <span class="product-card-tag coming-soon">Coming Soon</span>
+                <h3 class="product-card-name">VERU Raw Honey</h3>
+                <p class="product-card-desc">Unfiltered, unpasteurised raw honey. Straight from the hive — enzymes, pollen, and antioxidants fully intact.</p>
+                <span class="product-card-cta disabled">Notify Me →</span>
+            </div>
+        </div>
+
+        <!-- Honey 02 — placeholder -->
+        <div class="product-card reveal delay-2">
+            <div class="product-card-image">
+                <img src="https://placehold.co/600x800/C2A98A/F5F1E8?text=Coming+Soon" alt="VERU Creamed Honey">
+                <div class="product-card-image-glow"></div>
+            </div>
+            <div class="product-card-body">
+                <span class="product-card-tag coming-soon">Coming Soon</span>
+                <h3 class="product-card-name">VERU Creamed Honey</h3>
+                <p class="product-card-desc">Raw honey slow-crystallised to a smooth, spreadable consistency. Same purity — a different texture.</p>
+                <span class="product-card-cta disabled">Notify Me →</span>
+            </div>
+        </div>
+
+        <!-- Honey 03 — placeholder -->
+        <div class="product-card reveal delay-3">
+            <div class="product-card-image">
+                <img src="https://placehold.co/600x800/C2A98A/F5F1E8?text=Coming+Soon" alt="VERU Infused Honey">
+                <div class="product-card-image-glow"></div>
+            </div>
+            <div class="product-card-body">
+                <span class="product-card-tag coming-soon">Coming Soon</span>
+                <h3 class="product-card-name">VERU Infused Honey</h3>
+                <p class="product-card-desc">Raw honey naturally infused with whole botanicals. No extracts, no flavourings — just real ingredients steeped in time.</p>
+                <span class="product-card-cta disabled">Notify Me →</span>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════
+     OILS
+══════════════════════════════════════ -->
+<section class="category-section" id="oils">
+    <div class="category-header reveal">
+<h2 class="category-title">Oils</h2>
+    </div>
+    <div class="product-grid">
+
+        <!-- Oils 01 — placeholder -->
+        <div class="product-card reveal delay-1">
+            <div class="product-card-image">
+                <img src="https://placehold.co/600x800/C2A98A/F5F1E8?text=Coming+Soon" alt="VERU Extra Virgin Olive Oil">
+                <div class="product-card-image-glow"></div>
+            </div>
+            <div class="product-card-body">
+                <span class="product-card-tag coming-soon">Coming Soon</span>
+                <h3 class="product-card-name">VERU Olive Oil</h3>
+                <p class="product-card-desc">Single-origin, cold-pressed extra virgin olive oil. Harvested early for maximum polyphenols and a fresh, grassy finish.</p>
+                <span class="product-card-cta disabled">Notify Me →</span>
+            </div>
+        </div>
+
+        <!-- Oils 02 — placeholder -->
+        <div class="product-card reveal delay-2">
+            <div class="product-card-image">
+                <img src="https://placehold.co/600x800/C2A98A/F5F1E8?text=Coming+Soon" alt="VERU Coconut Oil">
+                <div class="product-card-image-glow"></div>
+            </div>
+            <div class="product-card-body">
+                <span class="product-card-tag coming-soon">Coming Soon</span>
+                <h3 class="product-card-name">VERU Coconut Oil</h3>
+                <p class="product-card-desc">Unrefined, cold-pressed virgin coconut oil. No bleaching, no deodorising — natural coconut aroma and full lauric acid content preserved.</p>
+                <span class="product-card-cta disabled">Notify Me →</span>
+            </div>
+        </div>
+
+        <!-- Oils 03 — placeholder -->
+        <div class="product-card reveal delay-3">
+            <div class="product-card-image">
+                <img src="https://placehold.co/600x800/C2A98A/F5F1E8?text=Coming+Soon" alt="VERU Avocado Oil">
+                <div class="product-card-image-glow"></div>
+            </div>
+            <div class="product-card-body">
+                <span class="product-card-tag coming-soon">Coming Soon</span>
+                <h3 class="product-card-name">VERU Avocado Oil</h3>
+                <p class="product-card-desc">Cold-pressed from ripe avocado flesh. High in oleic acid, vitamin E, and antioxidants — for cooking and skin care alike.</p>
+                <span class="product-card-cta disabled">Notify Me →</span>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<div class="footer-section">
+<footer>
+    <div class="footer-bg-text">VERU</div>
+    <div class="footer-inner">
+        <div class="footer-brand">
+            <div class="footer-logo">VERU</div>
+            <p class="footer-tagline">Real products, from natural sources.<br>Nothing added, nothing removed.</p>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; Made by WebGiants</p>
+        </div>
+    </div>
+</footer>
+</div>
+
+<script>
+    // ─── Mobile burger menu ───
+    const burger = document.getElementById('fnav-burger');
+    const mobileMenu = document.getElementById('fnav-mobile-menu');
+
+    burger.addEventListener('click', () => {
+        const isOpen = mobileMenu.classList.toggle('open');
+        burger.classList.toggle('open', isOpen);
+        burger.setAttribute('aria-expanded', isOpen);
+    });
+
+    mobileMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            mobileMenu.classList.remove('open');
+            burger.classList.remove('open');
+            burger.setAttribute('aria-expanded', false);
+        });
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('#fnav-wrap')) {
+            mobileMenu.classList.remove('open');
+            burger.classList.remove('open');
+            burger.setAttribute('aria-expanded', false);
+        }
+    });
+
+    // ─── Scroll reveal ───
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1, rootMargin: '0px 0px -24px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+</script>
+
+</body>
+</html>
