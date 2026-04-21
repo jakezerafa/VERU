@@ -217,6 +217,25 @@
         }
 
         /* ─── BUTTONS ─── */
+        .btn-secondary {
+            display: inline-block;
+            background: transparent;
+            color: var(--charcoal);
+            padding: 16px 44px;
+            font-size: 0.78rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            text-decoration: none;
+            border: 1px solid rgba(30,30,30,0.3);
+            transition: border-color 0.3s ease, color 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--charcoal);
+            color: var(--beige);
+            border-color: var(--beige);
+        }
+
         .btn-primary {
             display: inline-block;
             background: var(--charcoal);
@@ -343,7 +362,7 @@
             color: rgba(30,30,30,0.22);
         }
 
-        .product-info .section-label { margin-bottom: 20px; }
+        #product > .section-label { margin-bottom: 32px; }
 
         .product-visual-mobile {
             display: none;
@@ -1072,6 +1091,109 @@
         .fnav-mobile-menu a:last-child { border-bottom: none; }
         .fnav-mobile-menu a:hover { opacity: 1; color: var(--beige); background: rgba(194,169,138,0.07); }
 
+        /* ─── TESTIMONIALS ─── */
+        .testimonials-section {
+            padding: 120px 64px;
+            overflow: hidden;
+        }
+
+        .testimonials-header {
+            text-align: left;
+            margin-bottom: 72px;
+        }
+
+        .testimonials-header .section-label {
+            display: block;
+            margin-bottom: 16px;
+        }
+
+        .testimonials-title {
+            font-family: Georgia, 'Times New Roman', serif;
+            font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+            font-weight: normal;
+            line-height: 1.1;
+            letter-spacing: -0.01em;
+            margin-bottom: 16px;
+        }
+
+        .testimonials-sub {
+            font-size: 0.88rem;
+            color: rgba(30,30,30,0.48);
+            max-width: 380px;
+            line-height: 1.75;
+        }
+
+        .testimonials-columns {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            max-height: 680px;
+            overflow: hidden;
+            mask-image: linear-gradient(to bottom, transparent, black 18%, black 82%, transparent);
+            -webkit-mask-image: linear-gradient(to bottom, transparent, black 18%, black 82%, transparent);
+        }
+
+        .testimonials-col {
+            flex: 0 0 300px;
+            overflow: hidden;
+        }
+
+        @keyframes testimonials-scroll {
+            from { transform: translateY(0); }
+            to   { transform: translateY(-50%); }
+        }
+
+        .testimonials-track {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            animation: testimonials-scroll linear infinite;
+            padding-bottom: 20px;
+        }
+
+        .testimonials-card {
+            border: 1px solid rgba(30,30,30,0.09);
+            padding: 26px 28px;
+            background: rgba(255,255,255,0.42);
+            flex-shrink: 0;
+        }
+
+        .testimonials-card-text {
+            font-size: 0.85rem;
+            line-height: 1.8;
+            color: rgba(30,30,30,0.75);
+            margin-bottom: 20px;
+        }
+
+        .testimonials-card-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .testimonials-card-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .testimonials-card-name {
+            font-size: 0.78rem;
+            font-weight: 500;
+            color: var(--charcoal);
+            letter-spacing: 0.02em;
+            display: block;
+        }
+
+        .testimonials-card-role {
+            font-size: 0.72rem;
+            color: rgba(30,30,30,0.42);
+            display: block;
+            margin-top: 2px;
+        }
+
         /* ─── RESPONSIVE ─── */
         @media (max-width: 960px) {
             section, footer, .footer-inner { padding-left: 32px; padding-right: 32px; }
@@ -1090,6 +1212,7 @@
             .fnav-links { display: none; }
             .fnav-burger { display: flex; }
             .fnav-mobile-menu { display: flex; }
+            .testimonials-col:nth-child(3) { display: none; }
         }
 
         @media (max-width: 600px) {
@@ -1101,6 +1224,9 @@
             .footer-inner { padding-left: 24px; padding-right: 24px; }
             .footer-bottom { padding-left: 24px; padding-right: 24px; }
             .footer-bg-text { font-size: clamp(7rem, 50vw, 10rem); }
+            .testimonials-section { padding: 80px 24px; }
+            .testimonials-col:nth-child(2) { display: none; }
+            .testimonials-col { flex: 0 0 100%; max-width: 320px; }
         }
     </style>
 </head>
@@ -1151,6 +1277,7 @@
     </p>
 
     <div class="hero-actions">
+        <a href="products.html" class="btn-secondary">View Products</a>
         <a href="#order" class="btn-primary"><span>Order Now</span></a>
     </div>
 
@@ -1160,6 +1287,7 @@
 
 <!-- ─── PRODUCT ─── -->
 <section id="product">
+    <span class="section-label reveal">Products</span>
     <div class="product-grid">
         <div class="product-visual reveal-left">
             <img src="https://placehold.co/600x800/C2A98A/F5F1E8?text=Product+Photo" alt="VERU Tallow product photo placeholder">
@@ -1170,7 +1298,6 @@
             </div>
         </div>
         <div class="product-info">
-            <span class="section-label reveal">Products</span>
             <h2 class="product-name reveal delay-1">VERU<br>Tallow</h2>
             <div class="product-visual-mobile">
                 <img src="https://placehold.co/600x800/C2A98A/F5F1E8?text=Product+Photo" alt="VERU Tallow product photo placeholder">
@@ -1225,140 +1352,221 @@
     </div>
 </section>
 
-<!-- ─── BENEFITS ─── -->
-<section class="benefits-section" id="benefits">
-    <div class="benefits-inner">
-        <div class="benefits-left reveal">
-            <h2 class="benefits-heading">Why cook with<br><em>beef tallow?</em></h2>
-            <p class="benefits-intro">For centuries, beef tallow was the cooking fat of choice. Modern food science swapped it out for seed oils — but the old ways had it right.</p>
-            <div class="benefits-deco" aria-hidden="true">
-                <svg viewBox="0 0 96 128" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M48 4C24 36 6 64 6 88C6 110 25 124 48 124C71 124 90 110 90 88C90 64 72 36 48 4Z" stroke="rgba(194,169,138,0.18)" stroke-width="1.5"/>
-                    <path d="M48 28C34 52 22 72 22 88C22 102 33 114 48 114C63 114 74 102 74 88C74 72 62 52 48 28Z" stroke="rgba(194,169,138,0.1)" stroke-width="1"/>
-                    <path d="M48 54C40 68 36 80 36 88C36 96 41 102 48 102C55 102 60 96 60 88C60 80 56 68 48 54Z" stroke="rgba(194,169,138,0.07)" stroke-width="1"/>
-                </svg>
-            </div>
-        </div>
-        <div class="benefits-list">
-            <div class="benefit-item reveal delay-1">
-                <svg class="benefit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
-                    <line x1="12" y1="2" x2="12" y2="14"/><circle cx="12" cy="17" r="3"/><line x1="8" y1="6" x2="10" y2="6"/><line x1="8" y1="10" x2="10" y2="10"/>
-                </svg>
-                <div>
-                    <h3 class="benefit-title">High Smoke Point</h3>
-                    <p class="benefit-desc">Stable above 200°C — perfect for roasting, frying, and searing without oxidising or releasing harmful compounds.</p>
-                </div>
-            </div>
-            <div class="benefit-item reveal delay-2">
-                <svg class="benefit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M12 2L4 6v6c0 5 4 9 8 10 4-1 8-5 8-10V6L12 2z"/><path d="M9 12l2 2 4-4"/>
-                </svg>
-                <div>
-                    <h3 class="benefit-title">No Seed Oils</h3>
-                    <p class="benefit-desc">Free from inflammatory vegetable and seed oils. Pure rendered fat — nothing added, nothing removed.</p>
-                </div>
-            </div>
-            <div class="benefit-item reveal delay-3">
-                <svg class="benefit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
-                    <path d="M12 2C8 8 5 13 5 16a7 7 0 0014 0c0-3-3-8-7-14z"/>
-                </svg>
-                <div>
-                    <h3 class="benefit-title">Vitamins A, D, E &amp; K</h3>
-                    <p class="benefit-desc">Naturally rich in fat-soluble vitamins your body actually absorbs — especially when paired with whole foods.</p>
-                </div>
-            </div>
-            <div class="benefit-item reveal delay-4">
-                <svg class="benefit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
-                    <line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/>
-                    <line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/>
-                    <line x1="4.9" y1="4.9" x2="7.8" y2="7.8"/><line x1="16.2" y1="16.2" x2="19.1" y2="19.1"/>
-                    <line x1="4.9" y1="19.1" x2="7.8" y2="16.2"/><line x1="16.2" y1="7.8" x2="19.1" y2="4.9"/>
-                </svg>
-                <div>
-                    <h3 class="benefit-title">Exceptional Flavour</h3>
-                    <p class="benefit-desc">Adds a rich, savoury depth to roast potatoes, vegetables, and meat that no plant-based oil can replicate.</p>
-                </div>
-            </div>
-            <div class="benefit-item reveal delay-5">
-                <svg class="benefit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M5 2h14M5 22h14M7 2v5l5 5-5 5v5M17 2v5l-5 5 5 5v5"/>
-                </svg>
-                <div>
-                    <h3 class="benefit-title">Long Shelf Life</h3>
-                    <p class="benefit-desc">Naturally shelf-stable for months without refrigeration or preservatives. Rendered fat keeps the way nature intended.</p>
-                </div>
-            </div>
-            <div class="benefit-item reveal delay-5">
-                <svg class="benefit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/>
-                    <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
-                </svg>
-                <div>
-                    <h3 class="benefit-title">Conjugated Linoleic Acid</h3>
-                    <p class="benefit-desc">A naturally occurring fatty acid in grass-fed beef fat, linked to reduced inflammation and a healthy metabolism.</p>
-                </div>
-            </div>
-            <div class="benefit-item reveal delay-5">
-                <svg class="benefit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M12 2C8 8 5 13 5 16a7 7 0 0014 0c0-3-3-8-7-14z"/>
-                </svg>
-                <div>
-                    <h3 class="benefit-title">Natural Skin Moisturiser</h3>
-                    <p class="benefit-desc">Tallow's fatty acid profile closely mirrors human sebum — making it one of the most biocompatible moisturisers for skin, without synthetic emollients.</p>
-                </div>
-            </div>
-            <div class="benefit-item reveal delay-5">
-                <svg class="benefit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-                </svg>
-                <div>
-                    <h3 class="benefit-title">Skin-Safe &amp; Cosmetic Grade</h3>
-                    <p class="benefit-desc">Pure enough to eat, gentle enough for your face. VERU tallow contains no fragrances, no parabens, and no synthetics — just rendered fat as nature made it.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
 <div class="divider"></div>
 
-<!-- ─── ORDER ─── -->
-<section class="order-section" id="order">
-    <div class="order-inner">
-        <div class="order-heading reveal">
-            <span class="section-label">Order</span>
-        </div>
+<!-- ─── TESTIMONIALS ─── -->
+<section class="testimonials-section">
+    <div class="testimonials-header">
+        <span class="section-label reveal">Testimonials</span>
+        <h2 class="testimonials-title reveal delay-1">What our customers say</h2>
+    </div>
 
-        <div class="order-card reveal delay-2">
-            <!-- Product row -->
-            <div class="order-product-row">
-                <div>
-                    <span class="order-product-tag">In Stock</span>
-                    <h3 class="order-product-name">VERU Tallow</h3>
-                    <p class="order-product-desc">Small batch, locally sourced beef tallow. Slow-rendered for purity — no additives, no shortcuts.</p>
-                </div>
-                <div class="order-product-image">
-                    <img src="https://placehold.co/160x160/C2A98A/F5F1E8?text=Photo" alt="VERU Tallow product photo">
-                </div>
-            </div>
+    <div class="testimonials-columns">
 
-            <!-- Controls row -->
-            <div class="order-controls-row">
-                <div class="order-qty-group">
-                    <span class="order-qty-label">Quantity</span>
-                    <div class="qty-stepper">
-                        <button class="qty-btn" id="qty-minus" aria-label="Decrease quantity">−</button>
-                        <span class="qty-value" id="qty-value">1</span>
-                        <button class="qty-btn" id="qty-plus" aria-label="Increase quantity">+</button>
+        <!-- Column 1 — 22s -->
+        <div class="testimonials-col">
+            <div class="testimonials-track" style="animation-duration: 22s;">
+                <!-- set 1 -->
+                <div class="testimonials-card">
+                    <p class="testimonials-card-text">"VERU Tallow has completely changed the way I cook. My roast potatoes are now incredible — crispy outside, fluffy inside. Nothing else comes close."</p>
+                    <div class="testimonials-card-author">
+                        <img src="https://randomuser.me/api/portraits/women/10.jpg" alt="Emma T." class="testimonials-card-avatar">
+                        <div>
+                            <span class="testimonials-card-name">Emma T.</span>
+                            <span class="testimonials-card-role">Home Cook</span>
+                        </div>
                     </div>
                 </div>
-
-                <div class="order-action-group">
-                    <a href="#" class="btn-primary" id="order-btn"><span>Place Order</span></a>
-                    <p class="order-note">We'll confirm your order via email.</p>
+                <div class="testimonials-card">
+                    <p class="testimonials-card-text">"I started using VERU Tallow on dry patches of my skin and within weeks the difference was remarkable. I won't go back to anything synthetic."</p>
+                    <div class="testimonials-card-author">
+                        <img src="https://randomuser.me/api/portraits/women/20.jpg" alt="Sophie R." class="testimonials-card-avatar">
+                        <div>
+                            <span class="testimonials-card-name">Sophie R.</span>
+                            <span class="testimonials-card-role">Skincare Enthusiast</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonials-card">
+                    <p class="testimonials-card-text">"The quality is immediately obvious when you open the jar. Clean, pure, no additives. Exactly what tallow should be — and then some."</p>
+                    <div class="testimonials-card-author">
+                        <img src="https://randomuser.me/api/portraits/men/15.jpg" alt="Michael B." class="testimonials-card-avatar">
+                        <div>
+                            <span class="testimonials-card-name">Michael B.</span>
+                            <span class="testimonials-card-role">Chef</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- set 2 (duplicate for seamless loop) -->
+                <div class="testimonials-card">
+                    <p class="testimonials-card-text">"VERU Tallow has completely changed the way I cook. My roast potatoes are now incredible — crispy outside, fluffy inside. Nothing else comes close."</p>
+                    <div class="testimonials-card-author">
+                        <img src="https://randomuser.me/api/portraits/women/10.jpg" alt="Emma T." class="testimonials-card-avatar">
+                        <div>
+                            <span class="testimonials-card-name">Emma T.</span>
+                            <span class="testimonials-card-role">Home Cook</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonials-card">
+                    <p class="testimonials-card-text">"I started using VERU Tallow on dry patches of my skin and within weeks the difference was remarkable. I won't go back to anything synthetic."</p>
+                    <div class="testimonials-card-author">
+                        <img src="https://randomuser.me/api/portraits/women/20.jpg" alt="Sophie R." class="testimonials-card-avatar">
+                        <div>
+                            <span class="testimonials-card-name">Sophie R.</span>
+                            <span class="testimonials-card-role">Skincare Enthusiast</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonials-card">
+                    <p class="testimonials-card-text">"The quality is immediately obvious when you open the jar. Clean, pure, no additives. Exactly what tallow should be — and then some."</p>
+                    <div class="testimonials-card-author">
+                        <img src="https://randomuser.me/api/portraits/men/15.jpg" alt="Michael B." class="testimonials-card-avatar">
+                        <div>
+                            <span class="testimonials-card-name">Michael B.</span>
+                            <span class="testimonials-card-role">Chef</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+
+        <!-- Column 2 — 28s -->
+        <div class="testimonials-col">
+            <div class="testimonials-track" style="animation-duration: 28s;">
+                <!-- set 1 -->
+                <div class="testimonials-card">
+                    <p class="testimonials-card-text">"I've cooked with tallow for years but VERU is the best I've tried. The rendering is clearly done right — not a hint of off-flavour whatsoever."</p>
+                    <div class="testimonials-card-author">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="James C." class="testimonials-card-avatar">
+                        <div>
+                            <span class="testimonials-card-name">James C.</span>
+                            <span class="testimonials-card-role">Food Blogger</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonials-card">
+                    <p class="testimonials-card-text">"Ordered twice and both times it arrived quickly, well-packaged, and exactly as described. VERU is simply the real deal — no compromises."</p>
+                    <div class="testimonials-card-author">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Fiona M." class="testimonials-card-avatar">
+                        <div>
+                            <span class="testimonials-card-name">Fiona M.</span>
+                            <span class="testimonials-card-role">Verified Buyer</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonials-card">
+                    <p class="testimonials-card-text">"I was sceptical about switching from butter, but VERU Tallow gives my steaks a depth of flavour I didn't know was possible until I tried it."</p>
+                    <div class="testimonials-card-author">
+                        <img src="https://randomuser.me/api/portraits/men/56.jpg" alt="Daniel K." class="testimonials-card-avatar">
+                        <div>
+                            <span class="testimonials-card-name">Daniel K.</span>
+                            <span class="testimonials-card-role">BBQ Enthusiast</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- set 2 -->
+                <div class="testimonials-card">
+                    <p class="testimonials-card-text">"I've cooked with tallow for years but VERU is the best I've tried. The rendering is clearly done right — not a hint of off-flavour whatsoever."</p>
+                    <div class="testimonials-card-author">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="James C." class="testimonials-card-avatar">
+                        <div>
+                            <span class="testimonials-card-name">James C.</span>
+                            <span class="testimonials-card-role">Food Blogger</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonials-card">
+                    <p class="testimonials-card-text">"Ordered twice and both times it arrived quickly, well-packaged, and exactly as described. VERU is simply the real deal — no compromises."</p>
+                    <div class="testimonials-card-author">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Fiona M." class="testimonials-card-avatar">
+                        <div>
+                            <span class="testimonials-card-name">Fiona M.</span>
+                            <span class="testimonials-card-role">Verified Buyer</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonials-card">
+                    <p class="testimonials-card-text">"I was sceptical about switching from butter, but VERU Tallow gives my steaks a depth of flavour I didn't know was possible until I tried it."</p>
+                    <div class="testimonials-card-author">
+                        <img src="https://randomuser.me/api/portraits/men/56.jpg" alt="Daniel K." class="testimonials-card-avatar">
+                        <div>
+                            <span class="testimonials-card-name">Daniel K.</span>
+                            <span class="testimonials-card-role">BBQ Enthusiast</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Column 3 — 25s -->
+        <div class="testimonials-col">
+            <div class="testimonials-track" style="animation-duration: 25s;">
+                <!-- set 1 -->
+                <div class="testimonials-card">
+                    <p class="testimonials-card-text">"Finally a brand that doesn't compromise. Locally sourced, honestly labelled, and it shows in every single jar. Proud to support VERU."</p>
+                    <div class="testimonials-card-author">
+                        <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Laura H." class="testimonials-card-avatar">
+                        <div>
+                            <span class="testimonials-card-name">Laura H.</span>
+                            <span class="testimonials-card-role">Nutrition Coach</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonials-card">
+                    <p class="testimonials-card-text">"As someone on a carnivore diet, VERU Tallow is essential. Pure, clean fat — nothing hidden on the label. This is how food should be made."</p>
+                    <div class="testimonials-card-author">
+                        <img src="https://randomuser.me/api/portraits/men/77.jpg" alt="Tom W." class="testimonials-card-avatar">
+                        <div>
+                            <span class="testimonials-card-name">Tom W.</span>
+                            <span class="testimonials-card-role">Verified Buyer</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonials-card">
+                    <p class="testimonials-card-text">"The tallow melts beautifully, coats the pan evenly, and cleans up easily. Better in every way than the vegetable oils I used before."</p>
+                    <div class="testimonials-card-author">
+                        <img src="https://randomuser.me/api/portraits/women/88.jpg" alt="Rachel P." class="testimonials-card-avatar">
+                        <div>
+                            <span class="testimonials-card-name">Rachel P.</span>
+                            <span class="testimonials-card-role">Home Cook</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- set 2 -->
+                <div class="testimonials-card">
+                    <p class="testimonials-card-text">"Finally a brand that doesn't compromise. Locally sourced, honestly labelled, and it shows in every single jar. Proud to support VERU."</p>
+                    <div class="testimonials-card-author">
+                        <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Laura H." class="testimonials-card-avatar">
+                        <div>
+                            <span class="testimonials-card-name">Laura H.</span>
+                            <span class="testimonials-card-role">Nutrition Coach</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonials-card">
+                    <p class="testimonials-card-text">"As someone on a carnivore diet, VERU Tallow is essential. Pure, clean fat — nothing hidden on the label. This is how food should be made."</p>
+                    <div class="testimonials-card-author">
+                        <img src="https://randomuser.me/api/portraits/men/77.jpg" alt="Tom W." class="testimonials-card-avatar">
+                        <div>
+                            <span class="testimonials-card-name">Tom W.</span>
+                            <span class="testimonials-card-role">Verified Buyer</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonials-card">
+                    <p class="testimonials-card-text">"The tallow melts beautifully, coats the pan evenly, and cleans up easily. Better in every way than the vegetable oils I used before."</p>
+                    <div class="testimonials-card-author">
+                        <img src="https://randomuser.me/api/portraits/women/88.jpg" alt="Rachel P." class="testimonials-card-avatar">
+                        <div>
+                            <span class="testimonials-card-name">Rachel P.</span>
+                            <span class="testimonials-card-role">Home Cook</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 </section>
 
