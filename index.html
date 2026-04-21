@@ -978,6 +978,106 @@
             .footer-inner { padding: 40px 16px 32px; }
         }
 
+        /* ─── PRODUCT SCROLL FILM ─── */
+        .prod-film-outer {
+            height: 420vh;
+            position: relative;
+        }
+
+        .prod-film-sticky {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow: hidden;
+            background: #eae6dc;
+        }
+
+        #prod-canvas {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .prod-panels {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .prod-panel {
+            position: absolute;
+            bottom: 80px;
+            left: 64px;
+            max-width: 420px;
+            opacity: 0;
+            transform: translateY(16px);
+            transition: opacity 0.55s cubic-bezier(0.22,1,0.36,1), transform 0.55s cubic-bezier(0.22,1,0.36,1);
+            pointer-events: none;
+        }
+
+        .prod-panel.active {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        .prod-panel .section-label { color: var(--olive); margin-bottom: 12px; display: block; }
+
+        .prod-film-heading {
+            font-family: Georgia, serif;
+            font-size: clamp(2rem, 3.5vw, 3.2rem);
+            font-weight: normal;
+            line-height: 1.1;
+            color: var(--charcoal);
+            margin-bottom: 20px;
+        }
+
+        .prod-film-heading em { font-style: italic; color: var(--beige); }
+
+        .prod-panel-desc {
+            font-size: 0.88rem;
+            color: #5a5550;
+            line-height: 1.85;
+            max-width: 340px;
+            margin-bottom: 28px;
+        }
+
+        .prod-film-progress {
+            position: absolute;
+            right: 52px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 3;
+        }
+
+        .prod-film-dot {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: rgba(30,30,30,0.2);
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        .prod-film-dot.active {
+            background: var(--beige);
+            transform: scale(1.5);
+        }
+
+        @media (max-width: 960px) {
+            .prod-panel { left: 32px; bottom: 60px; }
+            .prod-film-progress { right: 28px; }
+        }
+
+        @media (max-width: 600px) {
+            .prod-panel { left: 24px; bottom: 40px; max-width: calc(100% - 80px); }
+            .prod-film-progress { right: 20px; }
+        }
+
         /* ─── ANIMATIONS ─── */
         @keyframes fadeUp {
             from { opacity: 0; transform: translateY(24px); }
@@ -1197,43 +1297,43 @@
 
 <div class="divider"></div>
 
-<!-- ─── PRODUCT ─── -->
-<section id="product">
-    <div class="product-grid">
-        <div class="product-visual reveal-left">
-            <img src="https://placehold.co/600x800/C2A98A/F5F1E8?text=Product+Photo" alt="VERU Tallow product photo placeholder">
-            <div class="product-visual-glow"></div>
-            <div class="product-visual-label">
-                <div class="product-visual-name">VERU</div>
-                <div class="product-visual-sub">Beef Tallow &mdash; Small Batch</div>
+<!-- ─── PRODUCT SCROLL FILM ─── -->
+<!-- Frames: save brand-assets/frames/frame-001.jpg … frame-100.jpg to enable real animation -->
+<div class="prod-film-outer" id="product">
+    <div class="prod-film-sticky">
+        <canvas id="prod-canvas"></canvas>
+
+        <div class="prod-panels">
+            <div class="prod-panel active" id="pp-0">
+                <span class="section-label">Products</span>
+                <h2 class="prod-film-heading">VERU<br><em>Tallow.</em></h2>
+                <p class="prod-panel-desc">Premium beef tallow, rendered slowly in small batches from locally sourced beef fat.</p>
+            </div>
+            <div class="prod-panel" id="pp-1">
+                <span class="section-label">Small Batch</span>
+                <h2 class="prod-film-heading">Locally<br><em>sourced.</em></h2>
+                <p class="prod-panel-desc">Every jar is traceable. We work directly with local suppliers — no shortcuts, no middlemen.</p>
+            </div>
+            <div class="prod-panel" id="pp-2">
+                <span class="section-label">Pure Process</span>
+                <h2 class="prod-film-heading">Nothing added.<br><em>Nothing removed.</em></h2>
+                <p class="prod-panel-desc">Slow-rendered for purity. No additives, no preservatives — just real beef fat as nature made it.</p>
+            </div>
+            <div class="prod-panel" id="pp-3">
+                <span class="section-label">Ready to order</span>
+                <h2 class="prod-film-heading">Your jar<br>is <em>waiting.</em></h2>
+                <a href="#order" class="btn-primary" style="margin-top:8px"><span>Order Your Jar</span></a>
             </div>
         </div>
-        <div class="product-info">
-            <span class="section-label reveal">Products</span>
-            <h2 class="product-name reveal delay-1">VERU<br>Tallow</h2>
-            <div class="product-visual-mobile">
-                <img src="https://placehold.co/600x800/C2A98A/F5F1E8?text=Product+Photo" alt="VERU Tallow product photo placeholder">
-                <div class="product-visual-glow"></div>
-                <div class="product-visual-label">
-                    <div class="product-visual-name">VERU</div>
-                    <div class="product-visual-sub">Beef Tallow &mdash; Small Batch</div>
-                </div>
-            </div>
-            <p class="product-desc reveal delay-2">
-                Premium beef tallow rendered slowly in small batches from locally sourced beef fat.
-                Pure, natural, and crafted with care &mdash; no shortcuts, no additives.
-                A return to the real thing at a price that respects you.
-            </p>
-            <ul class="product-tags reveal delay-3">
-                <li>Small batch production</li>
-                <li>Locally sourced beef fat</li>
-                <li>No additives or preservatives</li>
-                <li>Slow-rendered for purity</li>
-            </ul>
-            <a href="#order" class="btn-primary reveal delay-4"><span>Order Your Jar</span></a>
+
+        <div class="prod-film-progress" aria-hidden="true">
+            <div class="prod-film-dot active"></div>
+            <div class="prod-film-dot"></div>
+            <div class="prod-film-dot"></div>
+            <div class="prod-film-dot"></div>
         </div>
     </div>
-</section>
+</div>
 
 <div class="divider"></div>
 
@@ -1485,6 +1585,116 @@
     qtyMinus.addEventListener('click', () => { if (qty > 1) { qty--; updateOrder(); } });
     qtyPlus.addEventListener('click',  () => { qty++; updateOrder(); });
     updateOrder();
+
+    // ─── Product scroll film animation ───
+    (function () {
+        const outer  = document.getElementById('product');
+        const canvas = document.getElementById('prod-canvas');
+        const ctx    = canvas.getContext('2d');
+        const panels = Array.from(document.querySelectorAll('.prod-panel'));
+        const dots   = Array.from(document.querySelectorAll('.prod-film-dot'));
+
+        // Scroll progress thresholds for each text panel
+        const PANEL_BREAKS = [0, 0.28, 0.56, 0.8];
+
+        // ── Frame config ──
+        // Drop frames into brand-assets/frames/frame-001.jpg … frame-100.jpg
+        const FRAME_COUNT = 100;
+        const framePath = i => `brand-assets/frames/frame-${String(i + 1).padStart(3, '0')}.jpg`;
+
+        let useRealFrames = false;
+        let images = [];
+        let demoImg = null;
+        let ready   = false;
+        let lastProgress = 0;
+        let currentPanel = 0;
+
+        function resizeCanvas() {
+            canvas.width  = outer.offsetWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', () => { resizeCanvas(); render(); });
+
+        function drawImg(img, alpha) {
+            if (!img || !img.complete || !img.naturalWidth) return;
+            const cw = canvas.width, ch = canvas.height;
+            const scale = Math.max(cw / img.naturalWidth, ch / img.naturalHeight);
+            const w = img.naturalWidth  * scale;
+            const h = img.naturalHeight * scale;
+            ctx.clearRect(0, 0, cw, ch);
+            if (alpha !== undefined) ctx.globalAlpha = alpha;
+            ctx.drawImage(img, (cw - w) / 2, (ch - h) / 2, w, h);
+            ctx.globalAlpha = 1;
+        }
+
+        function render() {
+            const p = lastProgress;
+            if (useRealFrames) {
+                const idx = Math.min(FRAME_COUNT - 1, Math.floor(p * FRAME_COUNT));
+                drawImg(images[idx]);
+            } else if (demoImg) {
+                const scale = 0.78 + p * 0.28;
+                const alpha = 0.5 + p * 0.35;
+                const cw = canvas.width, ch = canvas.height;
+                const base = Math.min(cw / demoImg.naturalWidth, ch / demoImg.naturalHeight) * 0.85;
+                const s = base * scale;
+                const w = demoImg.naturalWidth  * s;
+                const h = demoImg.naturalHeight * s;
+                ctx.clearRect(0, 0, cw, ch);
+                ctx.globalAlpha = alpha;
+                ctx.drawImage(demoImg, (cw - w) / 2, (ch - h) / 2, w, h);
+                ctx.globalAlpha = 1;
+            }
+        }
+
+        // Try loading real frames; fall back to hero image demo
+        const probe = new Image();
+        probe.onload = () => {
+            useRealFrames = true;
+            images = Array.from({ length: FRAME_COUNT }, (_, i) => {
+                const img = new Image();
+                img.src = framePath(i);
+                return img;
+            });
+            ready = true;
+            render();
+        };
+        probe.onerror = () => {
+            demoImg = new Image();
+            demoImg.src = 'brand-assets/beef%20tallow%20hero%20image.png';
+            demoImg.onload = () => { ready = true; render(); };
+        };
+        probe.src = framePath(0);
+
+        let ticking = false;
+        function update() {
+            const rect   = outer.getBoundingClientRect();
+            const total  = outer.offsetHeight - window.innerHeight;
+            const p      = Math.max(0, Math.min(1, -rect.top / total));
+            lastProgress = p;
+
+            if (ready) render();
+
+            // Switch text panel
+            let next = 0;
+            for (let i = PANEL_BREAKS.length - 1; i >= 0; i--) {
+                if (p >= PANEL_BREAKS[i]) { next = i; break; }
+            }
+            if (next !== currentPanel) {
+                panels.forEach((el, i) => el.classList.toggle('active', i === next));
+                dots.forEach((el, i)   => el.classList.toggle('active', i === next));
+                currentPanel = next;
+            }
+            ticking = false;
+        }
+
+        window.addEventListener('scroll', () => {
+            if (!ticking) { requestAnimationFrame(update); ticking = true; }
+        }, { passive: true });
+
+        update();
+    })();
 
     // ─── Smooth anchor scroll ───
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
