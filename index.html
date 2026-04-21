@@ -1600,7 +1600,7 @@
         // ── Frame config ──
         // Drop frames into brand-assets/frames/frame-001.jpg … frame-100.jpg
         const FRAME_COUNT = 100;
-        const framePath = i => `brand-assets/frames/frame-${String(i + 1).padStart(3, '0')}.jpg`;
+        const framePath = i => `brand-assets/frames/${String(i + 1).padStart(3, '0')}.png`;
 
         let useRealFrames = false;
         let images = [];
