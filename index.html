@@ -216,36 +216,6 @@
             animation: fadeUp 0.75s ease 0.85s forwards;
         }
 
-        .hero-scroll-hint {
-            position: absolute;
-            bottom: 44px;
-            left: 0;
-            right: 0;
-            width: fit-content;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 16px;
-            opacity: 0;
-            animation: fadeUp 0.7s ease 1.3s forwards;
-        }
-
-        .scroll-line {
-            width: 1px;
-            height: 48px;
-            background: var(--beige);
-            transform-origin: top;
-            animation: lineGrow 1.8s ease-in-out 1.5s infinite alternate;
-        }
-
-        .scroll-label {
-            font-size: 0.65rem;
-            letter-spacing: 0.25em;
-            text-transform: uppercase;
-            color: #999;
-        }
-
         /* ─── BUTTONS ─── */
         .btn-primary {
             display: inline-block;
@@ -984,11 +954,6 @@
             to   { opacity: 1; transform: translateY(0); }
         }
 
-        @keyframes lineGrow {
-            from { height: 28px; opacity: 0.5; }
-            to   { height: 64px; opacity: 1; }
-        }
-
         .reveal {
             opacity: 0;
             transform: translateY(36px);
@@ -1111,7 +1076,7 @@
         @media (max-width: 960px) {
             section, footer, .footer-inner { padding-left: 32px; padding-right: 32px; }
             .hero { padding-left: 32px; padding-right: 32px; }
-            .hero-scroll-hint { left: 32px; }
+
             .product-grid { grid-template-columns: 1fr; gap: 52px; }
             .product-visual { display: none; }
             .product-visual-mobile { display: block; }
@@ -1129,7 +1094,7 @@
 
         @media (max-width: 600px) {
             .hero { padding: 110px 24px 80px; }
-            .hero-scroll-hint { left: 24px; }
+
             section { padding: 80px 24px; }
             .story-stats { grid-template-columns: 1fr; }
             .story-stat + .story-stat { padding-left: 0; border-left: none; padding-top: 32px; border-top: 1px solid rgba(245,241,232,0.12); }
@@ -1189,10 +1154,6 @@
         <a href="#order" class="btn-primary"><span>Order Now</span></a>
     </div>
 
-    <div class="hero-scroll-hint">
-        <div class="scroll-line"></div>
-        <span class="scroll-label">Scroll</span>
-    </div>
 </section>
 
 <div class="divider"></div>
