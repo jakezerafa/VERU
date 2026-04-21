@@ -1598,14 +1598,15 @@
         const PANEL_BREAKS = [0, 0.28, 0.56, 0.8];
 
         // ── Frame config ──
-        // Drop frames into brand-assets/frames/frame-001.jpg … frame-100.jpg
+        // Frames live at brand-assets/001.png … 100.png
         const FRAME_COUNT = 100;
-        const framePath = i => `brand-assets/frames/${String(i + 1).padStart(3, '0')}.png`;
+        const framePath = i => `brand-assets/${String(i + 1).padStart(3, '0')}.png`;
 
         let useRealFrames = false;
         let images = [];
         let demoImg = null;
         let ready   = false;
+        let lastDrawn = null;
         let lastProgress = 0;
         let currentPanel = 0;
 
@@ -1616,23 +1617,23 @@
         resizeCanvas();
         window.addEventListener('resize', () => { resizeCanvas(); render(); });
 
-        function drawImg(img, alpha) {
-            if (!img || !img.complete || !img.naturalWidth) return;
+        function drawImg(img) {
+            if (!img || !img.complete || !img.naturalWidth) return false;
             const cw = canvas.width, ch = canvas.height;
             const scale = Math.max(cw / img.naturalWidth, ch / img.naturalHeight);
             const w = img.naturalWidth  * scale;
             const h = img.naturalHeight * scale;
             ctx.clearRect(0, 0, cw, ch);
-            if (alpha !== undefined) ctx.globalAlpha = alpha;
             ctx.drawImage(img, (cw - w) / 2, (ch - h) / 2, w, h);
-            ctx.globalAlpha = 1;
+            lastDrawn = img;
+            return true;
         }
 
         function render() {
             const p = lastProgress;
             if (useRealFrames) {
                 const idx = Math.min(FRAME_COUNT - 1, Math.floor(p * FRAME_COUNT));
-                drawImg(images[idx]);
+                if (!drawImg(images[idx]) && lastDrawn) drawImg(lastDrawn);
             } else if (demoImg) {
                 const scale = 0.78 + p * 0.28;
                 const alpha = 0.5 + p * 0.35;
