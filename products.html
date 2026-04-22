@@ -1085,6 +1085,19 @@
     </div>
 </div>
 
+<!-- ─── BACK TO TOP ─── -->
+<div style="display:flex;justify-content:center;padding:64px 64px 80px;">
+    <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;"
+       style="display:inline-flex;align-items:center;gap:10px;font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--charcoal);text-decoration:none;opacity:0.45;transition:opacity 0.25s ease,color 0.25s ease;"
+       onmouseenter="this.style.opacity='1';this.style.color='var(--beige)'"
+       onmouseleave="this.style.opacity='0.45';this.style.color='var(--charcoal)'">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/>
+        </svg>
+        Back to top
+    </a>
+</div>
+
 <!-- ─── FOOTER ─── -->
 <div class="footer-section">
 <footer>
@@ -1140,6 +1153,7 @@
 
     document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 </script>
+
 
 </body>
 </html>

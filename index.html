@@ -306,22 +306,38 @@
             display: block;
         }
 
-        /* ─── PRODUCT ─── */
-        .product-grid {
+        /* ─── PRODUCT SHOWCASE ─── */
+        #product > .section-label { margin-bottom: 40px; }
+
+        .product-showcase {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 100px;
-            align-items: center;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
         }
 
-        .product-visual {
-            aspect-ratio: 3/4;
+        .showcase-card {
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+            color: var(--charcoal);
+            border: 1px solid rgba(30,30,30,0.1);
+            overflow: hidden;
+            transition: box-shadow 0.35s ease, transform 0.35s cubic-bezier(0.22,1,0.36,1);
+        }
+
+        .showcase-card:hover {
+            box-shadow: 0 12px 48px rgba(30,30,30,0.1);
+            transform: translateY(-4px);
+        }
+
+        .showcase-img {
+            aspect-ratio: 4/3;
             background: linear-gradient(145deg, #ede3d4 0%, #d9c9b3 50%, #c8ae94 100%);
             position: relative;
             overflow: hidden;
         }
 
-        .product-visual img {
+        .showcase-img img {
             position: absolute;
             inset: 0;
             width: 100%;
@@ -330,111 +346,50 @@
             display: block;
         }
 
-        .product-visual-glow {
+        .showcase-img-glow {
             position: absolute;
             inset: 0;
             background:
                 radial-gradient(ellipse at 25% 25%, rgba(255,255,255,0.28) 0%, transparent 55%),
                 radial-gradient(ellipse at 75% 75%, rgba(30,30,30,0.07) 0%, transparent 45%);
+            pointer-events: none;
         }
 
-        .product-visual-label {
-            position: absolute;
-            bottom: 40px;
-            left: 40px;
-            right: 40px;
+        .showcase-body {
+            padding: 28px 28px 32px;
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            flex: 1;
         }
 
-        .product-visual-name {
-            font-family: Georgia, serif;
-            font-size: 2.2rem;
-            color: rgba(30,30,30,0.18);
-            letter-spacing: 0.4em;
-        }
-
-        .product-visual-sub {
-            font-size: 0.65rem;
-            letter-spacing: 0.22em;
-            text-transform: uppercase;
-            color: rgba(30,30,30,0.22);
-        }
-
-        #product > .section-label { margin-bottom: 32px; }
-
-        .product-visual-mobile {
-            display: none;
-            aspect-ratio: 3/4;
-            background: linear-gradient(145deg, #ede3d4 0%, #d9c9b3 50%, #c8ae94 100%);
-            position: relative;
-            overflow: hidden;
-            width: 100%;
-            margin: 28px 0;
-        }
-        .product-visual-mobile img {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-        .product-visual-mobile .product-visual-glow {
-            position: absolute;
-            inset: 0;
-            background:
-                radial-gradient(ellipse at 25% 25%, rgba(255,255,255,0.28) 0%, transparent 55%),
-                radial-gradient(ellipse at 75% 75%, rgba(30,30,30,0.07) 0%, transparent 45%);
-        }
-        .product-visual-mobile .product-visual-label {
-            position: absolute;
-            bottom: 40px;
-            left: 40px;
-            right: 40px;
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-
-        .product-name {
+        .showcase-name {
             font-family: Georgia, 'Times New Roman', serif;
-            font-size: clamp(2.2rem, 4vw, 3.8rem);
+            font-size: 1.5rem;
             font-weight: normal;
-            line-height: 1.08;
-            margin-bottom: 28px;
+            line-height: 1.1;
+            margin-bottom: 12px;
         }
 
-        .product-desc {
-            font-size: 0.92rem;
+        .showcase-desc {
+            font-size: 0.85rem;
             color: #6a6460;
-            line-height: 1.95;
-            margin-bottom: 44px;
+            line-height: 1.85;
+            margin-bottom: 24px;
+            flex: 1;
         }
 
-        .product-tags {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-            margin-bottom: 52px;
+        .showcase-cta {
+            font-size: 0.74rem;
+            letter-spacing: 0.13em;
+            text-transform: uppercase;
+            color: var(--charcoal);
+            opacity: 0.5;
+            transition: opacity 0.25s ease, color 0.25s ease;
         }
 
-        .product-tags li {
-            display: flex;
-            align-items: center;
-            gap: 18px;
-            font-size: 0.83rem;
-            letter-spacing: 0.04em;
-        }
-
-        .product-tags li::before {
-            content: '';
-            width: 28px;
-            height: 1px;
-            background: var(--beige);
-            flex-shrink: 0;
+        .showcase-card:hover .showcase-cta {
+            opacity: 1;
+            color: var(--beige);
         }
 
         /* ─── STORY ─── */
@@ -1213,6 +1168,7 @@
             .fnav-burger { display: flex; }
             .fnav-mobile-menu { display: flex; }
             .testimonials-col:nth-child(3) { display: none; }
+            .product-showcase { grid-template-columns: repeat(2, 1fr); gap: 24px; }
         }
 
         @media (max-width: 600px) {
@@ -1227,6 +1183,7 @@
             .testimonials-section { padding: 80px 24px; }
             .testimonials-col:nth-child(2) { display: none; }
             .testimonials-col { flex: 0 0 100%; max-width: 320px; }
+            .product-showcase { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -1288,38 +1245,44 @@
 <!-- ─── PRODUCT ─── -->
 <section id="product">
     <span class="section-label reveal">Products</span>
-    <div class="product-grid">
-        <div class="product-visual reveal-left">
-            <img src="https://placehold.co/600x800/C2A98A/F5F1E8?text=Product+Photo" alt="VERU Tallow product photo placeholder">
-            <div class="product-visual-glow"></div>
-            <div class="product-visual-label">
-                <div class="product-visual-name">VERU</div>
-                <div class="product-visual-sub">Beef Tallow &mdash; Small Batch</div>
+    <div class="product-showcase">
+
+        <a href="products.html#tallow" class="showcase-card reveal delay-1">
+            <div class="showcase-img">
+                <img src="https://placehold.co/600x450/C2A98A/F5F1E8?text=Tallow" alt="VERU Tallow">
+                <div class="showcase-img-glow"></div>
             </div>
-        </div>
-        <div class="product-info">
-            <h2 class="product-name reveal delay-1">VERU<br>Tallow</h2>
-            <div class="product-visual-mobile">
-                <img src="https://placehold.co/600x800/C2A98A/F5F1E8?text=Product+Photo" alt="VERU Tallow product photo placeholder">
-                <div class="product-visual-glow"></div>
-                <div class="product-visual-label">
-                    <div class="product-visual-name">VERU</div>
-                    <div class="product-visual-sub">Beef Tallow &mdash; Small Batch</div>
-                </div>
+            <div class="showcase-body">
+                <h3 class="showcase-name">Tallow</h3>
+                <p class="showcase-desc">Small batch beef tallow, slow-rendered for purity. No additives, no shortcuts — just the real thing.</p>
+                <span class="showcase-cta">Explore →</span>
             </div>
-            <p class="product-desc reveal delay-2">
-                Premium beef tallow rendered slowly in small batches from locally sourced beef fat.
-                Pure, natural, and crafted with care &mdash; no shortcuts, no additives.
-                A return to the real thing at a price that respects you.
-            </p>
-            <ul class="product-tags reveal delay-3">
-                <li>Small batch production</li>
-                <li>Locally sourced beef fat</li>
-                <li>No additives or preservatives</li>
-                <li>Slow-rendered for purity</li>
-            </ul>
-            <a href="#order" class="btn-primary reveal delay-4"><span>Order Your Jar</span></a>
-        </div>
+        </a>
+
+        <a href="products.html#honey" class="showcase-card reveal delay-2">
+            <div class="showcase-img">
+                <img src="https://placehold.co/600x450/C2A98A/F5F1E8?text=Honey" alt="VERU Honey">
+                <div class="showcase-img-glow"></div>
+            </div>
+            <div class="showcase-body">
+                <h3 class="showcase-name">Honey</h3>
+                <p class="showcase-desc">Raw, unfiltered, and unpasteurised. Enzymes, pollen, and nutrients fully intact — straight from the hive.</p>
+                <span class="showcase-cta">Explore →</span>
+            </div>
+        </a>
+
+        <a href="products.html#oils" class="showcase-card reveal delay-3">
+            <div class="showcase-img">
+                <img src="https://placehold.co/600x450/C2A98A/F5F1E8?text=Oils" alt="VERU Oils">
+                <div class="showcase-img-glow"></div>
+            </div>
+            <div class="showcase-body">
+                <h3 class="showcase-name">Oils</h3>
+                <p class="showcase-desc">Cold-pressed and unrefined. No solvents, no heat — the full nutritional profile nature intended.</p>
+                <span class="showcase-cta">Explore →</span>
+            </div>
+        </a>
+
     </div>
 </section>
 
