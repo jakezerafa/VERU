@@ -306,38 +306,22 @@
             display: block;
         }
 
-        /* ─── PRODUCT SHOWCASE ─── */
-        #product > .section-label { margin-bottom: 40px; }
-
-        .product-showcase {
+        /* ─── PRODUCT ─── */
+        .product-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 32px;
+            grid-template-columns: 1fr 1fr;
+            gap: 100px;
+            align-items: center;
         }
 
-        .showcase-card {
-            display: flex;
-            flex-direction: column;
-            text-decoration: none;
-            color: var(--charcoal);
-            border: 1px solid rgba(30,30,30,0.1);
-            overflow: hidden;
-            transition: box-shadow 0.35s ease, transform 0.35s cubic-bezier(0.22,1,0.36,1);
-        }
-
-        .showcase-card:hover {
-            box-shadow: 0 12px 48px rgba(30,30,30,0.1);
-            transform: translateY(-4px);
-        }
-
-        .showcase-img {
-            aspect-ratio: 4/3;
+        .product-visual {
+            aspect-ratio: 3/4;
             background: linear-gradient(145deg, #ede3d4 0%, #d9c9b3 50%, #c8ae94 100%);
             position: relative;
             overflow: hidden;
         }
 
-        .showcase-img img {
+        .product-visual img {
             position: absolute;
             inset: 0;
             width: 100%;
@@ -346,50 +330,111 @@
             display: block;
         }
 
-        .showcase-img-glow {
+        .product-visual-glow {
             position: absolute;
             inset: 0;
             background:
                 radial-gradient(ellipse at 25% 25%, rgba(255,255,255,0.28) 0%, transparent 55%),
                 radial-gradient(ellipse at 75% 75%, rgba(30,30,30,0.07) 0%, transparent 45%);
-            pointer-events: none;
         }
 
-        .showcase-body {
-            padding: 28px 28px 32px;
+        .product-visual-label {
+            position: absolute;
+            bottom: 40px;
+            left: 40px;
+            right: 40px;
             display: flex;
             flex-direction: column;
-            flex: 1;
+            gap: 6px;
         }
 
-        .showcase-name {
-            font-family: Georgia, 'Times New Roman', serif;
-            font-size: 1.5rem;
-            font-weight: normal;
-            line-height: 1.1;
-            margin-bottom: 12px;
+        .product-visual-name {
+            font-family: Georgia, serif;
+            font-size: 2.2rem;
+            color: rgba(30,30,30,0.18);
+            letter-spacing: 0.4em;
         }
 
-        .showcase-desc {
-            font-size: 0.85rem;
-            color: #6a6460;
-            line-height: 1.85;
-            margin-bottom: 24px;
-            flex: 1;
-        }
-
-        .showcase-cta {
-            font-size: 0.74rem;
-            letter-spacing: 0.13em;
+        .product-visual-sub {
+            font-size: 0.65rem;
+            letter-spacing: 0.22em;
             text-transform: uppercase;
-            color: var(--charcoal);
-            opacity: 0.5;
-            transition: opacity 0.25s ease, color 0.25s ease;
+            color: rgba(30,30,30,0.22);
         }
 
-        .showcase-card:hover .showcase-cta {
-            opacity: 1;
-            color: var(--beige);
+        #product > .section-label { margin-bottom: 32px; }
+
+        .product-visual-mobile {
+            display: none;
+            aspect-ratio: 3/4;
+            background: linear-gradient(145deg, #ede3d4 0%, #d9c9b3 50%, #c8ae94 100%);
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            margin: 28px 0;
+        }
+        .product-visual-mobile img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .product-visual-mobile .product-visual-glow {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 25% 25%, rgba(255,255,255,0.28) 0%, transparent 55%),
+                radial-gradient(ellipse at 75% 75%, rgba(30,30,30,0.07) 0%, transparent 45%);
+        }
+        .product-visual-mobile .product-visual-label {
+            position: absolute;
+            bottom: 40px;
+            left: 40px;
+            right: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .product-name {
+            font-family: Georgia, 'Times New Roman', serif;
+            font-size: clamp(2.2rem, 4vw, 3.8rem);
+            font-weight: normal;
+            line-height: 1.08;
+            margin-bottom: 28px;
+        }
+
+        .product-desc {
+            font-size: 0.92rem;
+            color: #6a6460;
+            line-height: 1.95;
+            margin-bottom: 44px;
+        }
+
+        .product-tags {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin-bottom: 52px;
+        }
+
+        .product-tags li {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            font-size: 0.83rem;
+            letter-spacing: 0.04em;
+        }
+
+        .product-tags li::before {
+            content: '';
+            width: 28px;
+            height: 1px;
+            background: var(--beige);
+            flex-shrink: 0;
         }
 
         /* ─── STORY ─── */
@@ -1168,7 +1213,9 @@
             .fnav-burger { display: flex; }
             .fnav-mobile-menu { display: flex; }
             .testimonials-col:nth-child(3) { display: none; }
-            .product-showcase { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+            .product-grid { grid-template-columns: 1fr; gap: 52px; }
+            .product-visual { display: none; }
+            .product-visual-mobile { display: block; }
         }
 
         @media (max-width: 600px) {
@@ -1183,7 +1230,6 @@
             .testimonials-section { padding: 80px 24px; }
             .testimonials-col:nth-child(2) { display: none; }
             .testimonials-col { flex: 0 0 100%; max-width: 320px; }
-            .product-showcase { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -1245,44 +1291,135 @@
 <!-- ─── PRODUCT ─── -->
 <section id="product">
     <span class="section-label reveal">Products</span>
-    <div class="product-showcase">
+    <div class="product-grid">
+        <div class="product-visual reveal-left">
+            <img src="https://placehold.co/600x800/C2A98A/F5F1E8?text=Product+Photo" alt="VERU Tallow product photo placeholder">
+            <div class="product-visual-glow"></div>
+            <div class="product-visual-label">
+                <div class="product-visual-name">VERU</div>
+                <div class="product-visual-sub">Beef Tallow &mdash; Small Batch</div>
+            </div>
+        </div>
+        <div class="product-info">
+            <h2 class="product-name reveal delay-1">VERU<br>Tallow</h2>
+            <div class="product-visual-mobile">
+                <img src="https://placehold.co/600x800/C2A98A/F5F1E8?text=Product+Photo" alt="VERU Tallow product photo placeholder">
+                <div class="product-visual-glow"></div>
+                <div class="product-visual-label">
+                    <div class="product-visual-name">VERU</div>
+                    <div class="product-visual-sub">Beef Tallow &mdash; Small Batch</div>
+                </div>
+            </div>
+            <p class="product-desc reveal delay-2">
+                Premium beef tallow rendered slowly in small batches from locally sourced beef fat.
+                Pure, natural, and crafted with care &mdash; no shortcuts, no additives.
+                A return to the real thing at a price that respects you.
+            </p>
+            <ul class="product-tags reveal delay-3">
+                <li>Small batch production</li>
+                <li>Locally sourced beef fat</li>
+                <li>No additives or preservatives</li>
+                <li>Slow-rendered for purity</li>
+            </ul>
+            <a href="#order" class="btn-primary reveal delay-4"><span>Order Your Jar</span></a>
+        </div>
+    </div>
+</section>
 
-        <a href="products.html#tallow" class="showcase-card reveal delay-1">
-            <div class="showcase-img">
-                <img src="https://placehold.co/600x450/C2A98A/F5F1E8?text=Tallow" alt="VERU Tallow">
-                <div class="showcase-img-glow"></div>
-            </div>
-            <div class="showcase-body">
-                <h3 class="showcase-name">Tallow</h3>
-                <p class="showcase-desc">Small batch beef tallow, slow-rendered for purity. No additives, no shortcuts — just the real thing.</p>
-                <span class="showcase-cta">Explore →</span>
-            </div>
-        </a>
+<div class="divider"></div>
 
-        <a href="products.html#honey" class="showcase-card reveal delay-2">
-            <div class="showcase-img">
-                <img src="https://placehold.co/600x450/C2A98A/F5F1E8?text=Honey" alt="VERU Honey">
-                <div class="showcase-img-glow"></div>
+<!-- ─── BENEFITS ─── -->
+<section class="benefits-section" id="benefits">
+    <div class="benefits-inner">
+        <div class="benefits-left reveal">
+            <h2 class="benefits-heading">Why cook with<br><em>beef tallow?</em></h2>
+            <p class="benefits-intro">For centuries, beef tallow was the cooking fat of choice. Modern food science swapped it out for seed oils — but the old ways had it right.</p>
+            <div class="benefits-deco" aria-hidden="true">
+                <svg viewBox="0 0 96 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M48 4C24 36 6 64 6 88C6 110 25 124 48 124C71 124 90 110 90 88C90 64 72 36 48 4Z" stroke="rgba(194,169,138,0.18)" stroke-width="1.5"/>
+                    <path d="M48 28C34 52 22 72 22 88C22 102 33 114 48 114C63 114 74 102 74 88C74 72 62 52 48 28Z" stroke="rgba(194,169,138,0.1)" stroke-width="1"/>
+                    <path d="M48 54C40 68 36 80 36 88C36 96 41 102 48 102C55 102 60 96 60 88C60 80 56 68 48 54Z" stroke="rgba(194,169,138,0.07)" stroke-width="1"/>
+                </svg>
             </div>
-            <div class="showcase-body">
-                <h3 class="showcase-name">Honey</h3>
-                <p class="showcase-desc">Raw, unfiltered, and unpasteurised. Enzymes, pollen, and nutrients fully intact — straight from the hive.</p>
-                <span class="showcase-cta">Explore →</span>
+        </div>
+        <div class="benefits-list">
+            <div class="benefit-item reveal delay-1">
+                <svg class="benefit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                    <line x1="12" y1="2" x2="12" y2="14"/><circle cx="12" cy="17" r="3"/><line x1="8" y1="6" x2="10" y2="6"/><line x1="8" y1="10" x2="10" y2="10"/>
+                </svg>
+                <div>
+                    <h3 class="benefit-title">High Smoke Point</h3>
+                    <p class="benefit-desc">Stable above 200°C — perfect for roasting, frying, and searing without oxidising or releasing harmful compounds.</p>
+                </div>
             </div>
-        </a>
-
-        <a href="products.html#oils" class="showcase-card reveal delay-3">
-            <div class="showcase-img">
-                <img src="https://placehold.co/600x450/C2A98A/F5F1E8?text=Oils" alt="VERU Oils">
-                <div class="showcase-img-glow"></div>
+            <div class="benefit-item reveal delay-2">
+                <svg class="benefit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 2L4 6v6c0 5 4 9 8 10 4-1 8-5 8-10V6L12 2z"/><path d="M9 12l2 2 4-4"/>
+                </svg>
+                <div>
+                    <h3 class="benefit-title">No Seed Oils</h3>
+                    <p class="benefit-desc">Free from inflammatory vegetable and seed oils. Pure rendered fat — nothing added, nothing removed.</p>
+                </div>
             </div>
-            <div class="showcase-body">
-                <h3 class="showcase-name">Oils</h3>
-                <p class="showcase-desc">Cold-pressed and unrefined. No solvents, no heat — the full nutritional profile nature intended.</p>
-                <span class="showcase-cta">Explore →</span>
+            <div class="benefit-item reveal delay-3">
+                <svg class="benefit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                    <path d="M12 2C8 8 5 13 5 16a7 7 0 0014 0c0-3-3-8-7-14z"/>
+                </svg>
+                <div>
+                    <h3 class="benefit-title">Vitamins A, D, E &amp; K</h3>
+                    <p class="benefit-desc">Naturally rich in fat-soluble vitamins your body actually absorbs — especially when paired with whole foods.</p>
+                </div>
             </div>
-        </a>
-
+            <div class="benefit-item reveal delay-4">
+                <svg class="benefit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+                    <line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/>
+                    <line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/>
+                    <line x1="4.9" y1="4.9" x2="7.8" y2="7.8"/><line x1="16.2" y1="16.2" x2="19.1" y2="19.1"/>
+                    <line x1="4.9" y1="19.1" x2="7.8" y2="16.2"/><line x1="16.2" y1="7.8" x2="19.1" y2="4.9"/>
+                </svg>
+                <div>
+                    <h3 class="benefit-title">Exceptional Flavour</h3>
+                    <p class="benefit-desc">Adds a rich, savoury depth to roast potatoes, vegetables, and meat that no plant-based oil can replicate.</p>
+                </div>
+            </div>
+            <div class="benefit-item reveal delay-5">
+                <svg class="benefit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M5 2h14M5 22h14M7 2v5l5 5-5 5v5M17 2v5l-5 5 5 5v5"/>
+                </svg>
+                <div>
+                    <h3 class="benefit-title">Long Shelf Life</h3>
+                    <p class="benefit-desc">Naturally shelf-stable for months without refrigeration or preservatives. Rendered fat keeps the way nature intended.</p>
+                </div>
+            </div>
+            <div class="benefit-item reveal delay-5">
+                <svg class="benefit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/>
+                    <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
+                </svg>
+                <div>
+                    <h3 class="benefit-title">Conjugated Linoleic Acid</h3>
+                    <p class="benefit-desc">A naturally occurring fatty acid in grass-fed beef fat, linked to reduced inflammation and a healthy metabolism.</p>
+                </div>
+            </div>
+            <div class="benefit-item reveal delay-5">
+                <svg class="benefit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 2C8 8 5 13 5 16a7 7 0 0014 0c0-3-3-8-7-14z"/>
+                </svg>
+                <div>
+                    <h3 class="benefit-title">Natural Skin Moisturiser</h3>
+                    <p class="benefit-desc">Tallow's fatty acid profile closely mirrors human sebum — making it one of the most biocompatible moisturisers for skin, without synthetic emollients.</p>
+                </div>
+            </div>
+            <div class="benefit-item reveal delay-5">
+                <svg class="benefit-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                </svg>
+                <div>
+                    <h3 class="benefit-title">Skin-Safe &amp; Cosmetic Grade</h3>
+                    <p class="benefit-desc">Pure enough to eat, gentle enough for your face. VERU tallow contains no fragrances, no parabens, and no synthetics — just rendered fat as nature made it.</p>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 
