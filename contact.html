@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VERU — Contact Us</title>
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --cream: #F5F1E8;
+            --charcoal: #1E1E1E;
+            --olive: #6E7F64;
+            --beige: #C2A98A;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--cream);
+            color: var(--charcoal);
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ─── FLOATING NAV ─── */
+        .fnav-wrap {
+            position: fixed;
+            top: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+            animation: navDrop 0.7s cubic-bezier(0.22,1,0.36,1) 0.1s both;
+        }
+
+        @keyframes navDrop {
+            from { opacity: 0; transform: translateX(-50%) translateY(-48px); }
+            to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+        }
+
+        .fnav {
+            display: flex;
+            align-items: center;
+            height: 48px;
+            border-radius: 9999px;
+            border: 1px solid rgba(30,30,30,0.13);
+            background: rgba(245, 241, 232, 0.82);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            box-shadow: 0 4px 32px rgba(30,30,30,0.09), 0 1px 0 rgba(255,255,255,0.6) inset;
+            overflow: hidden;
+            transition: box-shadow 0.35s ease;
+            white-space: nowrap;
+        }
+
+        .fnav:hover { box-shadow: 0 8px 40px rgba(30,30,30,0.13), 0 1px 0 rgba(255,255,255,0.6) inset; }
+
+        .fnav-logo {
+            display: flex;
+            align-items: center;
+            flex-shrink: 0;
+            padding: 0 10px 0 20px;
+        }
+
+        .fnav-links {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding-right: 16px;
+        }
+
+        .fnav-links a {
+            text-decoration: none;
+            color: var(--charcoal);
+            font-size: 0.76rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 6px 12px;
+            opacity: 0.65;
+            transition: opacity 0.25s ease, color 0.25s ease;
+        }
+
+        .fnav-links a:hover { opacity: 1; color: var(--beige); }
+        .fnav-links a.active { opacity: 1; color: var(--charcoal); }
+
+        .fnav-cta {
+            display: flex;
+            align-items: center;
+            flex-shrink: 0;
+            margin-right: 6px;
+        }
+
+        .fnav-cta a {
+            background: var(--charcoal);
+            color: var(--cream);
+            font-size: 0.72rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            text-decoration: none;
+            padding: 8px 18px;
+            border-radius: 9999px;
+            transition: background 0.3s ease, color 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .fnav-cta a:hover { background: var(--beige); color: var(--charcoal); }
+
+        /* ─── PAGE HERO ─── */
+        .page-hero {
+            padding: 160px 64px 80px;
+        }
+
+        .page-hero-label {
+            font-size: 0.68rem;
+            letter-spacing: 0.32em;
+            text-transform: uppercase;
+            color: var(--olive);
+            display: block;
+            margin-bottom: 20px;
+            opacity: 0;
+            transform: translateY(18px);
+            animation: fadeUp 0.7s ease 0.2s forwards;
+        }
+
+        .page-hero-title {
+            font-family: Georgia, 'Times New Roman', serif;
+            font-size: clamp(2.4rem, 5vw, 4.2rem);
+            font-weight: normal;
+            line-height: 1.08;
+            letter-spacing: -0.01em;
+            opacity: 0;
+            transform: translateY(18px);
+            animation: fadeUp 0.7s ease 0.35s forwards;
+        }
+
+        .page-hero-sub {
+            font-size: 0.92rem;
+            color: rgba(30,30,30,0.5);
+            line-height: 1.8;
+            margin-top: 20px;
+            max-width: 440px;
+            opacity: 0;
+            transform: translateY(18px);
+            animation: fadeUp 0.7s ease 0.5s forwards;
+        }
+
+        /* ─── CTA STRIP (adapted from call-to-action-1) ─── */
+        .contact-cta {
+            margin: 0 64px 80px;
+            background: var(--charcoal);
+            color: var(--cream);
+            padding: 72px 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-cta-deco {
+            position: absolute;
+            top: -60px;
+            right: -40px;
+            width: 320px;
+            height: 420px;
+            opacity: 0.04;
+            pointer-events: none;
+        }
+
+        .contact-cta-inner {
+            position: relative;
+            z-index: 1;
+            max-width: 580px;
+        }
+
+        .contact-cta-label {
+            font-size: 0.68rem;
+            letter-spacing: 0.32em;
+            text-transform: uppercase;
+            color: var(--beige);
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        .contact-cta-title {
+            font-family: Georgia, 'Times New Roman', serif;
+            font-size: clamp(1.8rem, 3vw, 2.8rem);
+            font-weight: normal;
+            line-height: 1.18;
+            margin-bottom: 28px;
+            color: var(--cream);
+        }
+
+        .contact-cta-title em {
+            font-style: italic;
+            color: var(--beige);
+        }
+
+        .contact-cta-desc {
+            font-size: 0.9rem;
+            color: rgba(245,241,232,0.55);
+            line-height: 1.8;
+            margin-bottom: 40px;
+            max-width: 420px;
+        }
+
+        .contact-cta-btn {
+            display: inline-block;
+            background: var(--beige);
+            color: var(--charcoal);
+            font-size: 0.76rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            text-decoration: none;
+            padding: 14px 40px;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .contact-cta-btn:hover {
+            background: var(--cream);
+            color: var(--charcoal);
+        }
+
+        /* ─── CONTACT INFO (adapted from demo.tsx) ─── */
+        .contact-info {
+            padding: 0 64px 120px;
+        }
+
+        .contact-info-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 48px;
+            border-top: 1px solid rgba(30,30,30,0.08);
+            padding-top: 64px;
+        }
+
+        .contact-info-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .contact-info-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(110,127,100,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--olive);
+            margin-bottom: 20px;
+            flex-shrink: 0;
+        }
+
+        .contact-info-icon svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .contact-info-title {
+            font-family: Georgia, 'Times New Roman', serif;
+            font-size: 1.15rem;
+            font-weight: normal;
+            margin-bottom: 8px;
+        }
+
+        .contact-info-desc {
+            font-size: 0.84rem;
+            color: rgba(30,30,30,0.48);
+            line-height: 1.7;
+            margin-bottom: 16px;
+            flex: 1;
+        }
+
+        .contact-info-link {
+            font-size: 0.84rem;
+            color: var(--olive);
+            text-decoration: none;
+            letter-spacing: 0.02em;
+            border-bottom: 1px solid rgba(110,127,100,0.3);
+            padding-bottom: 2px;
+            width: fit-content;
+            transition: color 0.25s ease, border-color 0.25s ease;
+        }
+
+        .contact-info-link:hover {
+            color: var(--beige);
+            border-color: var(--beige);
+        }
+
+        /* ─── FOOTER ─── */
+        .footer-section {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        footer {
+            border-top: 1px solid rgba(245,241,232,0.08);
+            background: var(--charcoal);
+            color: var(--cream);
+            position: relative;
+        }
+
+        .footer-inner {
+            max-width: 1120px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 60px 24px 40px;
+            position: relative;
+            z-index: 5;
+        }
+
+        .footer-brand { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+
+        .footer-logo {
+            font-family: Georgia, serif;
+            font-size: 2rem;
+            letter-spacing: 0.25em;
+            font-weight: normal;
+            color: var(--cream);
+        }
+
+        .footer-tagline {
+            font-size: 0.88rem;
+            color: rgba(245,241,232,0.5);
+            text-align: center;
+            max-width: 24rem;
+            line-height: 1.7;
+        }
+
+        .footer-bottom {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            margin-top: 32px;
+            position: relative;
+            z-index: 5;
+        }
+
+        .footer-bottom p {
+            font-size: 0.78rem;
+            color: rgba(245,241,232,0.3);
+            letter-spacing: 0.05em;
+        }
+
+        .footer-bg-text {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 0;
+            font-family: Georgia, serif;
+            font-size: clamp(4rem, 16vw, 12rem);
+            font-weight: 900;
+            letter-spacing: -0.02em;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.05) 55%, transparent 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            pointer-events: none;
+            user-select: none;
+            white-space: nowrap;
+            text-align: center;
+            line-height: 1;
+            z-index: 0;
+        }
+
+        /* ─── ANIMATIONS ─── */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1);
+        }
+
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .delay-1 { transition-delay: 0.1s; }
+        .delay-2 { transition-delay: 0.2s; }
+        .delay-3 { transition-delay: 0.3s; }
+
+        /* ─── BURGER ─── */
+        .fnav-burger {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            padding: 0;
+            margin-right: 6px;
+            flex-shrink: 0;
+        }
+
+        .fnav-burger-bar {
+            display: block;
+            position: relative;
+            width: 18px;
+            height: 1.5px;
+            background: var(--charcoal);
+            transition: background 0.25s ease;
+        }
+
+        .fnav-burger-bar::before, .fnav-burger-bar::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--charcoal);
+            transition: transform 0.3s cubic-bezier(0.22,1,0.36,1), top 0.3s cubic-bezier(0.22,1,0.36,1), opacity 0.2s ease;
+        }
+
+        .fnav-burger-bar::before { top: -5px; }
+        .fnav-burger-bar::after  { top:  5px; }
+
+        .fnav-burger.open .fnav-burger-bar { background: transparent; }
+        .fnav-burger.open .fnav-burger-bar::before { top: 0; transform: rotate(45deg); }
+        .fnav-burger.open .fnav-burger-bar::after  { top: 0; transform: rotate(-45deg); }
+
+        .fnav-mobile-menu {
+            display: none;
+            flex-direction: column;
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 50%;
+            transform: translateX(-50%) translateY(-10px);
+            background: rgba(245,241,232,0.96);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid rgba(30,30,30,0.13);
+            border-radius: 20px;
+            box-shadow: 0 8px 40px rgba(30,30,30,0.12);
+            min-width: 180px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease, transform 0.32s cubic-bezier(0.22,1,0.36,1);
+            overflow: hidden;
+        }
+
+        .fnav-mobile-menu.open {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+            pointer-events: auto;
+        }
+
+        .fnav-mobile-menu a {
+            text-decoration: none;
+            color: var(--charcoal);
+            font-size: 0.76rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            padding: 16px 28px;
+            opacity: 0.65;
+            transition: opacity 0.2s ease, background 0.2s ease, color 0.2s ease;
+            border-bottom: 1px solid rgba(30,30,30,0.07);
+        }
+
+        .fnav-mobile-menu a:last-child { border-bottom: none; }
+        .fnav-mobile-menu a:hover { opacity: 1; color: var(--beige); background: rgba(194,169,138,0.07); }
+
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 960px) {
+            .fnav-links { display: none; }
+            .fnav-burger { display: flex; }
+            .fnav-mobile-menu { display: flex; }
+            .page-hero { padding: 140px 32px 64px; }
+            .contact-cta { margin: 0 32px 64px; padding: 52px 48px; }
+            .contact-info { padding: 0 32px 80px; }
+            .contact-info-grid { grid-template-columns: repeat(2, 1fr); gap: 36px; }
+        }
+
+        @media (max-width: 600px) {
+            .page-hero { padding: 120px 24px 48px; }
+            .contact-cta { margin: 0 24px 48px; padding: 40px 28px; }
+            .contact-info { padding: 0 24px 64px; }
+            .contact-info-grid { grid-template-columns: 1fr; gap: 40px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ─── FLOATING NAV ─── -->
+<div class="fnav-wrap" id="fnav-wrap">
+    <nav class="fnav" id="fnav">
+        <div class="fnav-logo">
+            <a href="index.html" style="font-family: Georgia, serif; font-size: 1.1rem; letter-spacing: 0.28em; color: var(--charcoal); text-decoration: none;">VERU</a>
+        </div>
+        <div class="fnav-links">
+            <a href="products.html">Products</a>
+            <a href="contact.html" class="active">Contact Us</a>
+        </div>
+        <div class="fnav-cta">
+            <a href="index.html#order">Order Now</a>
+        </div>
+        <button class="fnav-burger" id="fnav-burger" aria-label="Open menu" aria-expanded="false">
+            <span class="fnav-burger-bar"></span>
+        </button>
+    </nav>
+    <div class="fnav-mobile-menu" id="fnav-mobile-menu">
+        <a href="products.html">Products</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="index.html#order">Order Now</a>
+    </div>
+</div>
+
+<!-- ─── PAGE HERO ─── -->
+<div class="page-hero">
+    <span class="page-hero-label">Contact Us</span>
+    <h1 class="page-hero-title">We'd love to<br><em style="font-style:italic;color:var(--beige);">hear from you.</em></h1></div>
+
+<!-- ─── CONTACT INFO ─── -->
+<div class="contact-info">
+    <div class="contact-info-grid">
+
+        <div class="contact-info-item reveal delay-1">
+            <div class="contact-info-icon">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 4.125H3A1.125 1.125 0 0 0 1.875 5.25V18a1.875 1.875 0 0 0 1.875 1.875h16.5A1.875 1.875 0 0 0 22.125 18V5.25A1.125 1.125 0 0 0 21 4.125m-2.892 2.25L12 11.974 5.892 6.375zM4.125 17.625V7.808l7.115 6.522a1.125 1.125 0 0 0 1.52 0l7.115-6.522v9.817z" fill="currentColor"/>
+                </svg>
+            </div>
+            <h3 class="contact-info-title">Email Us</h3>
+            <p class="contact-info-desc">Our team typically responds within one business day.</p>
+            <a href="mailto:hello@veru.com" class="contact-info-link">hello@veru.com</a>
+        </div>
+
+        <div class="contact-info-item reveal delay-2">
+            <div class="contact-info-icon">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="currentColor"/>
+                </svg>
+            </div>
+            <h3 class="contact-info-title">Our Location</h3>
+            <p class="contact-info-desc">Based in Malta — sourcing and producing locally.</p>
+            <span class="contact-info-link" style="cursor:default;">Malta, EU</span>
+        </div>
+
+        <div class="contact-info-item reveal delay-3">
+            <div class="contact-info-icon">
+                <svg viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="m19 13.513-4.415-1.98-.017-.007a1.87 1.87 0 0 0-1.886.243l-2.091 1.781c-1.22-.66-2.478-1.91-3.14-3.113l1.787-2.125q.043-.051.08-.108a1.88 1.88 0 0 0 .148-1.782L7.488 2A1.88 1.88 0 0 0 5.539.89 5.65 5.65 0 0 0 .625 6.5c0 7.651 6.224 13.875 13.875 13.875a5.65 5.65 0 0 0 5.61-4.914A1.88 1.88 0 0 0 19 13.513m-4.5 4.612A11.64 11.64 0 0 1 2.875 6.5a3.4 3.4 0 0 1 2.67-3.332l1.764 3.938-1.796 2.14q-.044.051-.08.108a1.88 1.88 0 0 0-.12 1.841c.883 1.808 2.702 3.615 4.529 4.5a1.88 1.88 0 0 0 1.845-.136q.055-.036.105-.08l2.102-1.787 3.938 1.763a3.4 3.4 0 0 1-3.332 2.67" fill="currentColor"/>
+                </svg>
+            </div>
+            <h3 class="contact-info-title">Call Us</h3>
+            <p class="contact-info-desc">Available Monday to Friday, 9am – 5pm CET.</p>
+            <a href="tel:+35699000000" class="contact-info-link">+356 99 000 000</a>
+        </div>
+
+    </div>
+</div>
+
+<!-- ─── FOOTER ─── -->
+<div class="footer-section">
+<footer>
+    <div class="footer-bg-text">VERU</div>
+    <div class="footer-inner">
+        <div class="footer-brand">
+            <div class="footer-logo">VERU</div>
+            <p class="footer-tagline">Real products, from natural sources.<br>Nothing added, nothing removed.</p>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; Made by WebGiants</p>
+        </div>
+    </div>
+</footer>
+</div>
+
+<script>
+    const burger = document.getElementById('fnav-burger');
+    const mobileMenu = document.getElementById('fnav-mobile-menu');
+
+    burger.addEventListener('click', () => {
+        const isOpen = mobileMenu.classList.toggle('open');
+        burger.classList.toggle('open', isOpen);
+        burger.setAttribute('aria-expanded', isOpen);
+    });
+
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1, rootMargin: '0px 0px -24px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+</script>
+
+</body>
+</html>
